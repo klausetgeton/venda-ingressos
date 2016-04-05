@@ -1,8 +1,8 @@
 Criar um banco de dados com nome de laravel
 
-php artisan migrate:install
+php artisian migrate:install
 
-php artition make:auth
+php artisian make:auth
 
 
 
