@@ -1,3 +1,11 @@
+Criar um banco de dados com nome de laravel
+
+php artisan migrate:install
+
+php artition make:auth
+
+
+
 # Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
