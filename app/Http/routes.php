@@ -25,4 +25,18 @@ Route::controllers(
     'password' => 'Auth\PasswordController',
 ]);
 
+Route::get('/roles', ['as'=>'roles.index','uses'=>'RolesController@index']);
+Route::get('/roles/create', ['as'=>'roles.create','uses'=>'RolesController@create']);
+Route::post('/roles/store', ['as'=>'roles.store','uses'=>'RolesController@store']);
+Route::get('/roles/edit/{id}', ['as'=>'roles.edit','uses'=>'RolesController@edit']);
+Route::put('/roles/update/{id}',['as'=>'roles.update', 'uses'=>'RolesController@update']);
+
+Route::get('/users', ['as'=>'users.index','uses'=>'UsersController@index']);
+Route::get('/users/create', ['as'=>'users.create','uses'=>'UsersController@create']);
+Route::post('/users/store', ['as'=>'users.store','uses'=>'UsersController@store']);
+Route::get('/users/edit/{id}', ['as'=>'users.edit','uses'=>'UsersController@edit']);
+Route::put('/users/update/{id}',['as'=>'users.update', 'uses'=>'UsersController@update']);
+
+
+
 

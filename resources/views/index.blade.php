@@ -15,6 +15,11 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
+    <!-- SweetAlerts -->
+    <script src="/js/sweetalert.min.js"></script> 
+    <link rel="stylesheet" type="text/css" href="/css/sweetalert.css">
+
+
     <style>
         body {
             font-family: 'Lato';
@@ -53,6 +58,16 @@
                  <ul class="nav navbar-nav">
                     <li><a href="{{ url('/auth/login') }}">Login</a></li>
                 </ul>
+
+                @role('admin')
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url('/roles') }}">Grupos</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url('/users') }}">Usuários</a></li>
+                </ul>
+                @endrole
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">

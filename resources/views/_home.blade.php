@@ -2,8 +2,19 @@
 
 @section('content')
 
+@role('admin')
+	<?php
+				
 
-	{{ dd(\Auth::user()) }}
-	{{-- dd(\App\User::all()) --}}
+		if (Auth::user()->hasRole('admin')) { // you can pass an id or slug
+
+			echo "</br>";
+    		echo "O usuário " . Auth::user()->id . " é do grupo admin";	
+		}
+
+	?>
+	
+@endrole
+
 
 @endsection
