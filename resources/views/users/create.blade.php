@@ -43,7 +43,6 @@
 				{!! Form::text('password', null, ['class'=>'form-control']) !!}
 				</div>
 			@endif
-		
 
 			<div class="form-group">
 			{!! Form::submit('Salvar', ['class'=>'btn btn-primary']) !!}

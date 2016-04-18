@@ -150,7 +150,9 @@ return [
          */
         Bican\Roles\RolesServiceProvider::class,
 
-        'Illuminate\Html\HtmlServiceProvider',
+        Illuminate\Html\HtmlServiceProvider::class,
+        
+        OwenIt\Auditing\AuditingServiceProvider::class
 
 
     ],

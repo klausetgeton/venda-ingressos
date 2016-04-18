@@ -67,6 +67,10 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/users') }}">Usuários</a></li>
                 </ul>
+
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url('/auditing') }}">Auditoria</a></li>
+                </ul>
                 @endrole
 
                 <!-- Right Side Of Navbar -->

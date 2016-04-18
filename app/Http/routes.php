@@ -25,6 +25,9 @@ Route::controllers(
     'password' => 'Auth\PasswordController',
 ]);
 
+Route::get('/auditing', ['as'=>'auditing.index','uses'=>'AuditoriaController@index']);
+
+
 Route::get('/roles', ['as'=>'roles.index','uses'=>'RolesController@index']);
 Route::get('/roles/create', ['as'=>'roles.create','uses'=>'RolesController@create']);
 Route::post('/roles/store', ['as'=>'roles.store','uses'=>'RolesController@store']);
