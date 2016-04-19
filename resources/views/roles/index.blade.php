@@ -2,7 +2,6 @@
 
 @section('content')
 
-@role('admin')
 	<div class="container">
 		<h1>Grupos</h1>		
 		<a href="{{ route('roles.create') }}" class="btn btn-default">Novo Grupo</a>
@@ -39,12 +38,5 @@
 			swal("Operação concluída com sucesso!", "", "success");
 		</script>
 	@endif
-
-@else
-	<script>
-		swal("Acesso Negado!", "", "error");
-	</script>
-@endrole
-
 
 @endsection

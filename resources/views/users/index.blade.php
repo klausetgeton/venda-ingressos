@@ -2,7 +2,6 @@
 
 @section('content')
 
-@role('admin')
 	<div class="container">
 		<h1>Usuários</h1>		
 		<a href="{{ route('users.create') }}" class="btn btn-default">Novo Usuário</a>
@@ -26,7 +25,7 @@
 						<td>{{ $role->email }}</td>
 						<td>
 							<a href="{{ route('users.edit',['id'=>$role->id]) }}" class="btn-sm btn-success">Editar</a>
-						<!--	<a href="{{ route('users.edit',['id'=>$role->id]) }}" class="btn-sm btn-danger">Remover</a>	-->				
+							<a href="javascript:showConfirmDeleteDialog(' {{ route('users.delete',['id'=>$role->id]) }} ');" class="btn-sm btn-danger">Remover</a>			
 						</td>
 					</tr>
 				@endforeach
@@ -40,11 +39,33 @@
 		</script>
 	@endif
 
-@else
-	<script>
-		swal("Acesso Negado!", "", "error");
-	</script>
-@endrole
+<script>
+	function showConfirmDeleteDialog(link) {
+ 		 swal({   
+			title: "Deseja apagar o registro?",   
+			text: "A ação não poderá ser desfeita",   
+			type: "warning",   
+			showCancelButton: true,   
+			confirmButtonColor: "#DD6B55",   
+			confirmButtonText: "Apagar",   
+			cancelButtonText: "Cancelar",   
+			closeOnConfirm: false,   
+			closeOnCancel: true
 
+			}, 
+
+			function(isConfirm)
+			{   
+				if (isConfirm) 
+				{     
+					window.location.assign(link);
+				} 			
+				else
+				{
+
+			}
+		});  		
+	}
+</script>
 
 @endsection

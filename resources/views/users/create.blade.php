@@ -2,8 +2,6 @@
 
 @section('content')
 
-	@role('admin')
-
 
 		<div class="container">
 			<h1>Usuário</h1>
@@ -50,13 +48,4 @@
 			{!! Form::close() !!}
 		</div>
 	
-
-
-	@else
-		<script>
-			swal("Acesso Negado!", "", "error");
-		</script>
-@endrole
-
-
 @endsection

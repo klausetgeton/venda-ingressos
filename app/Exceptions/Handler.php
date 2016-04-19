@@ -46,6 +46,21 @@ class Handler extends ExceptionHandler
             $e = new NotFoundHttpException($e->getMessage(), $e);
         }
 
+        if ($e instanceof \Bican\Roles\Exceptions\RoleDeniedException) {
+            // you can for example flash message, redirect...
+            return redirect('permission.denied');
+        }
+
+        if ($e instanceof \Bican\Roles\Exceptions\PermissionDeniedException) {
+            // you can for example flash message, redirect...
+            return redirect('permission.denied');
+        }
+
+        if ($e instanceof \Bican\Roles\Exceptions\LevelDeniedException) {
+            // you can for example flash message, redirect...
+            return redirect('permission.denied');
+        }
+
         return parent::render($request, $e);
     }
 }

@@ -28,18 +28,20 @@ Route::controllers(
 Route::get('/auditing', ['as'=>'auditing.index','uses'=>'AuditoriaController@index']);
 
 
-Route::get('/roles', ['as'=>'roles.index','uses'=>'RolesController@index']);
-Route::get('/roles/create', ['as'=>'roles.create','uses'=>'RolesController@create']);
-Route::post('/roles/store', ['as'=>'roles.store','uses'=>'RolesController@store']);
-Route::get('/roles/edit/{id}', ['as'=>'roles.edit','uses'=>'RolesController@edit']);
-Route::put('/roles/update/{id}',['as'=>'roles.update', 'uses'=>'RolesController@update']);
+Route::get('/roles', ['as'=>'roles.index','middleware' => 'role:admin','uses'=>'RolesController@index']);
+Route::get('/roles/create', ['as'=>'roles.create','middleware' => 'role:admin','uses'=>'RolesController@create']);
+Route::post('/roles/store', ['as'=>'roles.store','middleware' => 'role:admin','uses'=>'RolesController@store']);
+Route::get('/roles/edit/{id}', ['as'=>'roles.edit','middleware' => 'role:admin','uses'=>'RolesController@edit']);
+Route::put('/roles/update/{id}',['as'=>'roles.update','middleware' => 'role:admin', 'uses'=>'RolesController@update']);
 
-Route::get('/users', ['as'=>'users.index','uses'=>'UsersController@index']);
-Route::get('/users/create', ['as'=>'users.create','uses'=>'UsersController@create']);
-Route::post('/users/store', ['as'=>'users.store','uses'=>'UsersController@store']);
-Route::get('/users/edit/{id}', ['as'=>'users.edit','uses'=>'UsersController@edit']);
-Route::put('/users/update/{id}',['as'=>'users.update', 'uses'=>'UsersController@update']);
+Route::get('/users', [	'as'=>'users.index',	'middleware' => 'role:admin',	'uses'=>'UsersController@index']);
+Route::get('/users/create', ['as'=>'users.create', 'middleware' => 'role:admin', 'uses'=>'UsersController@create']);
+Route::post('/users/store', ['as'=>'users.store', 'middleware' => 'role:admin','uses'=>'UsersController@store']);
+Route::get('/users/edit/{id}', ['as'=>'users.edit', 'middleware' => 'role:admin','uses'=>'UsersController@edit']);
+Route::put('/users/update/{id}',['as'=>'users.update', 'middleware' => 'role:admin', 'uses'=>'UsersController@update']);
+Route::get('/users/delete/{id}',['as'=>'users.delete', 'middleware' => 'role:admin', 'uses'=>'UsersController@delete']);	
 
 
-
-
+Route::get('/permission.denied', function () {
+    return view('errors.permissionDenied');
+});

@@ -18,8 +18,7 @@
     <!-- SweetAlerts -->
     <script src="/js/sweetalert.min.js"></script> 
     <link rel="stylesheet" type="text/css" href="/css/sweetalert.css">
-
-
+    
     <style>
         body {
             font-family: 'Lato';

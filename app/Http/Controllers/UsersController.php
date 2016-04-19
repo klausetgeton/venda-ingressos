@@ -22,7 +22,7 @@ class UsersController extends Controller
 
 	public function store(Request $request)
 	{
-		$input = $request->all();
+		$input = $request->all();		
 		User::create($input);
 		return redirect('users');
 	}
@@ -40,5 +40,13 @@ class UsersController extends Controller
 		
 		return redirect('users');
 	
+	}
+
+
+	public function delete($id)
+	{		
+		User::find($id)->delete();
+				
+		return redirect('users');
 	}
 }
