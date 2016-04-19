@@ -25,13 +25,42 @@
 						<td>{{ $role->slug }}</td>
 						<td>
 							<a href="{{ route('roles.edit',['id'=>$role->id]) }}" class="btn-sm btn-success">Editar</a>
-						<!--	<a href="{{ route('roles.edit',['id'=>$role->id]) }}" class="btn-sm btn-danger">Remover</a>	-->				
+						<a href="javascript:showConfirmDeleteDialog(' {{ route('roles.delete',['id'=>$role->id]) }} ');" class="btn-sm btn-danger">Remover</a>			
 						</td>
 					</tr>
 				@endforeach
 			</tbody>
 		</table>
 	</div>
+
+<script>
+	function showConfirmDeleteDialog(link) {
+ 		 swal({   
+			title: "Deseja apagar o registro?",   
+			text: "A ação não poderá ser desfeita",   
+			type: "warning",   
+			showCancelButton: true,   
+			confirmButtonColor: "#DD6B55",   
+			confirmButtonText: "Apagar",   
+			cancelButtonText: "Cancelar",   
+			closeOnConfirm: false,   
+			closeOnCancel: true
+
+			}, 
+
+			function(isConfirm)
+			{   
+				if (isConfirm) 
+				{     
+					window.location.assign(link);
+				} 			
+				else
+				{
+
+			}
+		});  		
+	}
+</script>
 
 	@if (isset($message))
 		<script>

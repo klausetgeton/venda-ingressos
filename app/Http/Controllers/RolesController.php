@@ -41,4 +41,11 @@ class RolesController extends Controller
 		return redirect('roles');
 	
 	}
+
+	public function delete($id)
+	{		
+		Role::find($id)->delete();
+				
+		return redirect('roles');
+	}
 }

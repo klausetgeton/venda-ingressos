@@ -33,6 +33,7 @@ Route::get('/roles/create', ['as'=>'roles.create','middleware' => 'role:admin','
 Route::post('/roles/store', ['as'=>'roles.store','middleware' => 'role:admin','uses'=>'RolesController@store']);
 Route::get('/roles/edit/{id}', ['as'=>'roles.edit','middleware' => 'role:admin','uses'=>'RolesController@edit']);
 Route::put('/roles/update/{id}',['as'=>'roles.update','middleware' => 'role:admin', 'uses'=>'RolesController@update']);
+Route::get('/roles/delete/{id}',['as'=>'roles.delete', 'middleware' => 'role:admin', 'uses'=>'RolesController@delete']);	
 
 Route::get('/users', [	'as'=>'users.index',	'middleware' => 'role:admin',	'uses'=>'UsersController@index']);
 Route::get('/users/create', ['as'=>'users.create', 'middleware' => 'role:admin', 'uses'=>'UsersController@create']);

@@ -33,39 +33,41 @@
 		</table>
 	</div>
 
+	
+
+	<script>
+		function showConfirmDeleteDialog(link) {
+	 		 swal({   
+				title: "Deseja apagar o registro?",   
+				text: "A ação não poderá ser desfeita",   
+				type: "warning",   
+				showCancelButton: true,   
+				confirmButtonColor: "#DD6B55",   
+				confirmButtonText: "Apagar",   
+				cancelButtonText: "Cancelar",   
+				closeOnConfirm: false,   
+				closeOnCancel: true
+
+				}, 
+
+				function(isConfirm)
+				{   
+					if (isConfirm) 
+					{     
+						window.location.assign(link);
+					} 			
+					else
+					{
+
+				}
+			});  		
+		}
+	</script>
+
 	@if (isset($message))
 		<script>
 			swal("Operação concluída com sucesso!", "", "success");
 		</script>
 	@endif
-
-<script>
-	function showConfirmDeleteDialog(link) {
- 		 swal({   
-			title: "Deseja apagar o registro?",   
-			text: "A ação não poderá ser desfeita",   
-			type: "warning",   
-			showCancelButton: true,   
-			confirmButtonColor: "#DD6B55",   
-			confirmButtonText: "Apagar",   
-			cancelButtonText: "Cancelar",   
-			closeOnConfirm: false,   
-			closeOnCancel: true
-
-			}, 
-
-			function(isConfirm)
-			{   
-				if (isConfirm) 
-				{     
-					window.location.assign(link);
-				} 			
-				else
-				{
-
-			}
-		});  		
-	}
-</script>
 
 @endsection
