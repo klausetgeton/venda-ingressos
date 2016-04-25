@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "246435f0dd89caff827ecce241a15cce",
+    "hash": "b5639d7704629d8d6eb1c79a2f1723b7",
+    "content-hash": "4e0deb514823c7825d2b3402336c320d",
     "packages": [
         {
             "name": "bican/roles",
