@@ -119,7 +119,7 @@ return [
         Illuminate\Bus\BusServiceProvider::class,
         Illuminate\Cache\CacheServiceProvider::class,
         Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
-        Illuminate\Routing\ControllerServiceProvider::class,
+        
         Illuminate\Cookie\CookieServiceProvider::class,
         Illuminate\Database\DatabaseServiceProvider::class,
         Illuminate\Encryption\EncryptionServiceProvider::class,
@@ -150,7 +150,7 @@ return [
          */
         Bican\Roles\RolesServiceProvider::class,
 
-        Illuminate\Html\HtmlServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
         
         OwenIt\Auditing\AuditingServiceProvider::class
 
@@ -206,8 +206,8 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
 
 
-        'Html'      => 'Illuminate\Html\HtmlFacade',
-        'Form'      => 'Illuminate\Html\FormFacade',
+        'Html'      => 'Collective\Html\HtmlFacade',
+        'Form'      => 'Collective\Html\FormFacade',
 
     ],
 
