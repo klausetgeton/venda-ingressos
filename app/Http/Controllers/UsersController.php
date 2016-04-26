@@ -11,7 +11,8 @@ class UsersController extends Controller
 	public function index()
 	{
 		$users = User::all();
-		return view('users.index',['users'=>$users]);
+
+		return view('users.index', compact('users'));
 	}
 
 	public function create()
@@ -19,18 +20,18 @@ class UsersController extends Controller
 		return view('users.create');
 	}
 
-
 	public function store(Request $request)
 	{
-		$input = $request->all();		
-		User::create($input);
-		return redirect('users');
+		User::create($request->all());
+
+		return redirect()->route('users.index');
 	}
 
 	public function edit($id)
 	{
 		$user = User::find($id);
-		return view('users.create',compact('user'));
+
+		return view('users.create', compact('user'));
 	}
 
 	
@@ -38,8 +39,7 @@ class UsersController extends Controller
 	{
 		$user = User::find($id)->update($request->all());
 		
-		return redirect('users');
-	
+		return redirect()->route('users.index');
 	}
 
 
@@ -47,6 +47,6 @@ class UsersController extends Controller
 	{		
 		User::find($id)->delete();
 				
-		return redirect('users');
+		return redirect()->route('users.index');
 	}
 }
