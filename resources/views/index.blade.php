@@ -60,15 +60,15 @@
 
                 @role('admin')
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/roles') }}">Grupos</a></li>
+                    <li><a href="{{ route('roles.index') }}">Grupos</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/users') }}">Usuários</a></li>
+                    <li><a href="{{ route('users.index') }}">Usuários</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/auditing') }}">Auditoria</a></li>
+                    <li><a href="{{ route('auditing.index') }}">Auditoria</a></li>
                 </ul>
                 @endrole
 
