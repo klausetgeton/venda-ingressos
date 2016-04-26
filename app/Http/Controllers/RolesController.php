@@ -11,7 +11,8 @@ class RolesController extends Controller
 	public function index()
 	{
 		$roles = Role::all();
-		return view('roles.index',['roles'=>$roles]);
+
+		return view('roles.index', compact('roles'));
 	}
 
 	public function create()
@@ -19,17 +20,17 @@ class RolesController extends Controller
 		return view('roles.create');
 	}
 
-
 	public function store(Request $request)
 	{
-		$input = $request->all();
-		Role::create($input);
-		return redirect('roles');
+		Role::create($request->all());
+
+		return redirect()->route('roles.index');
 	}
 
 	public function edit($id)
 	{
 		$role = Role::find($id);
+
 		return view('roles.create',compact('role'));
 	}
 
@@ -38,8 +39,7 @@ class RolesController extends Controller
 	{
 		$role = Role::find($id)->update($request->all());
 		
-		return redirect('roles');
-	
+		return redirect()->route('roles.index');
 	}
 
 	public function delete($id)
