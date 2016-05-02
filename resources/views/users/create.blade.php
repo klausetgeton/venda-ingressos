@@ -6,7 +6,6 @@
 		<div class="container">
 			<h1>Usuário</h1>
 
-
 			@if ($errors->any())
 			<ul class="alert alert-warning">
 				@foreach($errors->all() as $error)

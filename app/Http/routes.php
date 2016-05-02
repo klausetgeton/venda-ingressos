@@ -50,9 +50,9 @@ Route::group(['middleware' => ['auth']], function () {
 
 });
 
+Route::get('teste', ['as'=>'teste',	'middleware' => 'role:admin',	'uses'=>'UsersController@teste']);
 
-
-
+Route::get('teste-ajax/{id?}', ['as'=>'teste.ajax', 'middleware' => 'role:admin','uses'=>'UsersController@testeAjax']);
 
 Route::get('/permission.denied', function () {
     return view('errors.permissionDenied');

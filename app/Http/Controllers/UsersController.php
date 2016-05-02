@@ -8,6 +8,20 @@ use App\Model\User;
 
 class UsersController extends Controller
 {
+
+	public function teste()
+	{		
+		return view('users.teste');
+	}
+
+	public function testeAjax($search = null)
+    {
+        $users = User::where('name', 'like', "%$search%")->get();
+        //$users = User::all();
+        //return Response::json($users);
+        return response()->json($users);
+    }
+
 	public function index()
 	{
 		$users = User::all();
