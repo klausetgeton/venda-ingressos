@@ -31,6 +31,9 @@
 				@endforeach
 			</tbody>
 		</table>
+
+		{{ $roles->render() }}
+
 	</div>
 
 <script>
