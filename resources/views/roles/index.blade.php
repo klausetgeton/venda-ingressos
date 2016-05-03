@@ -8,33 +8,11 @@
 		<br />
 		<br />
 
-		<table class="table table-striped table-bordered table-hover">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Nome amigável</th>
-					<th>Nome identificador</th>
-					<th>Ação</th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach($roles as $role)
-					<tr>
-						<td>{{ $role->id }}</td>
-						<td>{{ $role->name }}</td>
-						<td>{{ $role->slug }}</td>
-						<td>
-							<a href="{{ route('roles.edit',['id'=>$role->id]) }}" class="btn-sm btn-success">Editar</a>
-						<a href="javascript:showConfirmDeleteDialog(' {{ route('roles.delete',['id'=>$role->id]) }} ');" class="btn-sm btn-danger">Remover</a>			
-						</td>
-					</tr>
-				@endforeach
-			</tbody>
-		</table>
-
-		{{ $roles->render() }}
+		@include('roles._rolesList')
 
 	</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
 
 <script>
 	function showConfirmDeleteDialog(link) {
@@ -63,6 +41,37 @@
 			}
 		});  		
 	}
+
+
+	$(window).on('hashchange', function() {
+        if (window.location.hash) {
+            var page = window.location.hash.replace('#', '');
+            if (page == Number.NaN || page <= 0) {
+                return false;
+            } else {
+                getRoles(page);
+            }
+        }
+    });
+
+    $(document).ready(function() {
+        $(document).on('click', '.pagination a', function (e) {
+            getRoles($(this).attr('href').split('page=')[1]);
+            e.preventDefault();
+        });
+    });
+
+    function getRoles(page) {
+        $.ajax({
+            url : '?page=' + page,
+            dataType: 'json',
+        }).done(function (data) {
+            $('.container-listagem').html(data);
+            location.hash = page;
+        }).fail(function () {
+            alert('Posts could not be loaded.');
+        });
+    }
 </script>
 
 	@if (isset($message))

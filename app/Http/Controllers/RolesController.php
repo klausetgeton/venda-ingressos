@@ -8,9 +8,14 @@ use Bican\Roles\Models\Role;
 
 class RolesController extends Controller
 {
-	public function index()
+	public function index(Request $request)
 	{
 		$roles = Role::paginate(2);
+
+        if( $request->ajax() )
+        {
+            return response()->json(\View::make('roles._rolesList', array('roles' => $roles))->render());
+        }
 
 		return view('roles.index', compact('roles'));
 	}
