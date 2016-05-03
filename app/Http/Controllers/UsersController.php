@@ -14,11 +14,13 @@ class UsersController extends Controller
 		return view('users.teste');
 	}
 
-	public function testeAjax($search = null)
-    {
-        $users = User::where('name', 'like', "%$search%")->get();
-        //$users = User::all();
-        //return Response::json($users);
+	public function testeAjax($model, $search_column, $search = null)
+    {   
+
+		$classesDisponiveisParaRest['User'] = 'App\Model\User';
+
+    	$user = new $classesDisponiveisParaRest[$model];
+        $users = $user::where($search_column, 'like', "%$search%")->get();             
         return response()->json($users);
     }
 

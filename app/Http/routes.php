@@ -47,13 +47,12 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::get('users/delete/{id}',['as'=>'users.delete', 'middleware' => 'role:admin', 'uses'=>'UsersController@delete']);	
 
     });
-
 });
 
 Route::get('teste', ['as'=>'teste',	'middleware' => 'role:admin',	'uses'=>'UsersController@teste']);
 
-Route::get('teste-ajax/{id?}', ['as'=>'teste.ajax', 'middleware' => 'role:admin','uses'=>'UsersController@testeAjax']);
+Route::get('teste-ajax/{model}/{search_column}/{textoconsulta?}', ['as'=>'teste.ajax', 'middleware' => 'role:admin','uses'=>'UsersController@testeAjax']);
 
 Route::get('/permission.denied', function () {
-    return view('errors.permissionDenied');
+    return view('errors.permissiondenied');
 });
