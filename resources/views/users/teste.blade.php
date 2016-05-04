@@ -12,9 +12,9 @@
 			<?php
 
 			$model = "User";
-			$search_column = "name";
-			$id_field = 'gp_id';
-			$description_field = 'gp_name';
+			$description_column = "name";
+			$form_id_field = 'gp_id';
+			$form_description_field = 'gp_name';
 
 			?>
 

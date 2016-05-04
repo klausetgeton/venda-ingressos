@@ -56,3 +56,8 @@ Route::get('teste-ajax/{model}/{search_column}/{textoconsulta?}', ['as'=>'teste.
 Route::get('/permission.denied', function () {
     return view('errors.permissiondenied');
 });
+
+Route::get('datatables.data/{model}', [
+    'as' => 'datatables.data', 
+    'uses' => 'DatatablesController@anyData'
+]);

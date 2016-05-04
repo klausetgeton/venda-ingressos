@@ -10,25 +10,15 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">Busca</h4>
 			</div>
-			<div class="modal-body">
-				<form class="form-inline" role="form">
-					<div class="form-group">
-						<label for="search">Nome:</label>
-						<input type="search" class="form-control" id="search">
-					</div>
-					<button type="submit" class="btn btn-default">Buscar</button>
-				</form>
-
+			<div class="modal-body">			
 				<table id="resultsTable" class="table">
 					<thead>
 						<tr>
 							<th>Id</th>
-							<th>Nome</th>
+							<th>{!! $description_column !!}</th>
 							<th>Ação</th>
 						</tr>
-					</thead>
-					<tbody>
-					</tbody>
+					</thead>			
 				</table>
 			</div>
 			<div class="modal-footer">
@@ -40,73 +30,42 @@
 </div>
 
 
-<script type="text/javascript">	
-
-	
-	function teste(){
-	    try{
-	    	$('#resultsTable').DataTable();
-	    	console.log("entrou no try");	    	  
-	    }catch(err){
-	    	console.log("entrou no catch");
-	        $.getScript('/n/jquery.dataTables.min.js', function() {
-	            $.getScript('/n/dataTables.bootstrap.min.js', function() {
-	            	$("#resultsTable").DataTable();	            	
-	        	});
-	        });
-	    }
-	}
-
-	function clearTable(){
+<script>	
+	$(function() {
 		try{
-	    	var oTable = $("#resultsTable").dataTable();	
-    		oTable.fnClearTable();	    	
-	    }catch(err){
-	    	console.log("entrou no catch");
-	        $.getScript('/n/jquery.dataTables.min.js', function() {
-	            $.getScript('/n/dataTables.bootstrap.min.js', function() {
-	            	console.log("leu os scripts");	
-	            	var oTable = $("#resultsTable").dataTable();	
-    				oTable.fnClearTable();            	
-	        	});
-	        });
-	    }
-	    		
-	}
-
-
-	$( "form" ).submit(function( event ) {
-		event.preventDefault();
-		var search = $("#search").val();
-		$.get(`/teste-ajax/{!!$model !!}/{!!$search_column!!}/${search} `, function (users) {	
-			
-			
-	    	clearTable();
-
-			$.each(users, function (key, value) {
-				$("#resultsTable").find('tbody')
-				.append($('<tr>')
-					.append($('<td>')
-						.append(value.id)								            
-						)
-					.append($('<td>')
-						.append(value.name)
-						)
-					.append($('<td>')
-						.append('<a href="javascript:selectFromModalTable(\''+value.id+'\',\''+value.name+'\');" class="btn btn-default btn-sm" role="button">Selecionar</a>')
-						)								        						          
-					);
+			loadTable();
+			console.log("entrou no try");	    	  
+		}catch(err){	    		
+			$.getScript('/js/jquery.dataTables.min.js', function() {
+				$.getScript('/js/dataTables.bootstrap.min.js', function() {
+					loadTable();
+				});
 			});
+		}
+	});
 
-			teste();			       				        
-		});
-	});     
+	function loadTable(){			
+		$('#resultsTable').DataTable({
+			processing: true,
+			serverSide: true,
+			ajax: 'datatables.data/{!! $model !!}',
+			columns: [
+			{ data: 'id', name: 'id' },
+			{ data: '{!! $description_column !!}', name: '{!! $description_column !!}' },
+			{ data: null, render: function ( data, type, row ) {    
+				return "<a href=\"javascript:selectFromModalTable(\'" +data.id + "\',\'" +data.name+ "\');\" class=\"btn btn-default btn-sm\" role=\"button\">Selecionar</a>"	
+			}, orderable: false, "bSearchable": false },
+			],
+			"language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese-Brasil.json"
+            }
+		});	
+	}
 
 	function selectFromModalTable(id, text) {				    	    	  
-		$( "#{!! $id_field !!}" ).val(id);
-		$( "#{!! $description_field !!}" ).val(text);	
-		$( "#searchModal" ).modal("hide");	
-
+		$( "#{!! $form_id_field !!}" ).val(id);
+		$( "#{!! $form_description_field !!}" ).val(text);	
+		$( "#searchModal" ).modal("hide");				       				        	 		
 	} 
 
 </script>
