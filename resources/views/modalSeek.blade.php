@@ -30,17 +30,6 @@
 					<tbody>
 					</tbody>
 				</table>
-
-				<ul class = "pagination">
-					<li><a href = "#">&laquo;</a></li>
-					<li><a href = "#">1</a></li>
-					<li><a href = "#">2</a></li>
-					<li><a href = "#">3</a></li>
-					<li><a href = "#">4</a></li>
-					<li><a href = "#">5</a></li>
-					<li><a href = "#">&raquo;</a></li>
-				</ul>
-
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
@@ -51,12 +40,48 @@
 </div>
 
 
-<script type="text/javascript">				
+<script type="text/javascript">	
+
+	
+	function teste(){
+	    try{
+	    	$('#resultsTable').DataTable();
+	    	console.log("entrou no try");	    	  
+	    }catch(err){
+	    	console.log("entrou no catch");
+	        $.getScript('/n/jquery.dataTables.min.js', function() {
+	            $.getScript('/n/dataTables.bootstrap.min.js', function() {
+	            	$("#resultsTable").DataTable();	            	
+	        	});
+	        });
+	    }
+	}
+
+	function clearTable(){
+		try{
+	    	var oTable = $("#resultsTable").dataTable();	
+    		oTable.fnClearTable();	    	
+	    }catch(err){
+	    	console.log("entrou no catch");
+	        $.getScript('/n/jquery.dataTables.min.js', function() {
+	            $.getScript('/n/dataTables.bootstrap.min.js', function() {
+	            	console.log("leu os scripts");	
+	            	var oTable = $("#resultsTable").dataTable();	
+    				oTable.fnClearTable();            	
+	        	});
+	        });
+	    }
+	    		
+	}
+
+
 	$( "form" ).submit(function( event ) {
 		event.preventDefault();
 		var search = $("#search").val();
 		$.get(`/teste-ajax/{!!$model !!}/{!!$search_column!!}/${search} `, function (users) {	
-			$('#resultsTable tbody > tr').remove();	 
+			
+			
+	    	clearTable();
 
 			$.each(users, function (key, value) {
 				$("#resultsTable").find('tbody')
@@ -73,14 +98,15 @@
 					);
 			});
 
-
+			teste();			       				        
 		});
 	});     
 
 	function selectFromModalTable(id, text) {				    	    	  
 		$( "#{!! $id_field !!}" ).val(id);
 		$( "#{!! $description_field !!}" ).val(text);	
-		$( "#searchModal" ).modal("hide");				       				        
+		$( "#searchModal" ).modal("hide");	
+
 	} 
 
 </script>
