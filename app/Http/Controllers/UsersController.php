@@ -55,6 +55,7 @@ class UsersController extends Controller
 	{
 		$user = User::find($id)->update($request->all());
 		
+		session()->flash('message', 'ok');
 		return redirect()->route('users.index');
 	}
 
@@ -62,7 +63,8 @@ class UsersController extends Controller
 	public function delete($id)
 	{		
 		User::find($id)->delete();
-				
+		
+		session()->flash('message', 'ok');
 		return redirect()->route('users.index');
 	}
 }

@@ -19,6 +19,9 @@
     <script src="/js/sweetalert.min.js"></script> 
     <link rel="stylesheet" type="text/css" href="/css/sweetalert.css">
 
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    
     <style>
         body {
             font-family: 'Lato';

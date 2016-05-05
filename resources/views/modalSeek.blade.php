@@ -1,5 +1,3 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-
 <!-- Modal -->
 <div id="searchModal" class="modal" role="dialog">
 	<div class="modal-dialog modal-lg">
@@ -33,8 +31,7 @@
 <script>	
 	$(function() {
 		try{
-			loadTable();
-			console.log("entrou no try");	    	  
+			loadTable();			
 		}catch(err){	    		
 			$.getScript('/js/jquery.dataTables.min.js', function() {
 				$.getScript('/js/dataTables.bootstrap.min.js', function() {
@@ -48,7 +45,7 @@
 		$('#resultsTable').DataTable({
 			processing: true,
 			serverSide: true,
-			ajax: 'datatables.data/{!! $model !!}',
+			ajax: '{!! route('datatables.data', ['model' => $model]) !!}',
 			columns: [
 			{ data: 'id', name: 'id' },
 			{ data: '{!! $description_column !!}', name: '{!! $description_column !!}' },
@@ -58,7 +55,8 @@
 			],
 			"language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese-Brasil.json"
-            }
+            },
+            "order": [[ 0, "desc" ]],
 		});	
 	}
 

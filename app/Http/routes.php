@@ -57,7 +57,7 @@ Route::get('/permission.denied', function () {
     return view('errors.permissiondenied');
 });
 
-Route::get('datatables.data/{model}', [
+Route::get('/datatables.data/{model}', [
     'as' => 'datatables.data', 
     'uses' => 'DatatablesController@anyData'
 ]);
