@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Model\Role;
+use Bican\Roles\Models\Role;
 use App\Model\User;
 use Yajra\Datatables\Datatables;
 
@@ -17,7 +17,7 @@ class DatatablesController extends Controller
     public function anyData($model = null)
     {
     	$fullModalClass['User'] = 'App\Model\User';
-    	$fullModalClass['Role'] = 'App\Model\Role';
+    	$fullModalClass['Role'] = 'Bican\Roles\Models\Role';
 
     	$users = $fullModalClass[$model]::query();
         return Datatables::of($users)        	

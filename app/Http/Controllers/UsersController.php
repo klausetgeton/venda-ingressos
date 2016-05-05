@@ -14,16 +14,6 @@ class UsersController extends Controller
 		return view('users.teste');
 	}
 
-	public function testeAjax($model, $search_column, $search = null)
-    {   
-
-		$classesDisponiveisParaRest['User'] = 'App\Model\User';
-
-    	$user = new $classesDisponiveisParaRest[$model];
-        $users = $user::where($search_column, 'like', "%$search%")->get();             
-        return response()->json($users);
-    }
-
 	public function index()
 	{
 		$users = User::all();
@@ -39,7 +29,7 @@ class UsersController extends Controller
 	public function store(Request $request)
 	{
 		User::create($request->all());
-
+		session()->flash('message', 'ok');
 		return redirect()->route('users.index');
 	}
 

@@ -6,16 +6,15 @@ use Illuminate\Http\Request;
 
 use Bican\Roles\Models\Role;
 
+use App\Http\Requests\RoleRequest;
+
+
 class RolesController extends Controller
 {
 	public function index(Request $request)
 	{
-		$roles = Role::paginate(2);
-
-        if( $request->ajax() )
-        {
-            return response()->json(\View::make('roles._rolesList', array('roles' => $roles))->render());
-        }
+		
+		$roles = Role::all();
 
 		return view('roles.index', compact('roles'));
 	}
@@ -25,10 +24,10 @@ class RolesController extends Controller
 		return view('roles.create');
 	}
 
-	public function store(Request $request)
+	public function store(RoleRequest $request)
 	{
 		Role::create($request->all());
-
+		session()->flash('message', 'ok');
 		return redirect()->route('roles.index');
 	}
 
@@ -39,17 +38,17 @@ class RolesController extends Controller
 		return view('roles.create',compact('role'));
 	}
 	
-	public function update(Request $request, $id)
+	public function update(RoleRequest $request, $id)
 	{
 		$role = Role::find($id)->update($request->all());
-		
+		session()->flash('message', 'ok');
 		return redirect()->route('roles.index');
 	}
 
 	public function delete($id)
 	{		
 		Role::find($id)->delete();
-				
-		return redirect('roles');
+		session()->flash('message', 'ok');
+		return redirect()->route('roles.index');
 	}
 }

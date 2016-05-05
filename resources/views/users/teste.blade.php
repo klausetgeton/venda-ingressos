@@ -10,7 +10,7 @@
 
 
 			<?php
-
+			//variables used on the seek component
 			$model = "User";
 			$description_column = "name";
 			$form_id_field = 'gp_id';
