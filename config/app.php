@@ -152,7 +152,10 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
         
-        OwenIt\Auditing\AuditingServiceProvider::class
+        OwenIt\Auditing\AuditingServiceProvider::class,
+
+        App\Providers\FormServiceProvider::class
+
 
 
     ],

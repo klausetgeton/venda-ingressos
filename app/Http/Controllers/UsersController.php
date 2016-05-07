@@ -14,6 +14,7 @@ class UsersController extends Controller
 		return view('users.teste');
 	}
 
+
 	public function index()
 	{
 		$users = User::all();

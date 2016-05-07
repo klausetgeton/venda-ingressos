@@ -18,7 +18,8 @@
 
 			?>
 
-			@include('modalSeek')
+			@include('/components/form/modalSeek')
+			
 
 			@if (isset($user))
 				{!! Form::model($user, ['route' => ['users.update', $user->id], 'method' => 'put']) !!}				
@@ -41,6 +42,11 @@
 				{!! Form::label('gp_name', ' ') !!}			
 				{!! Form::text('gp_name', null, ['class'=>'form-control', 'style'=>'width:80%;', 'disabled']) !!}
 				<a class="btn btn-info" style="width:9%;" data-toggle="modal" data-target="#searchModal">Procurar	</a>
+			</div>
+
+			<div class="form-group">
+				{!! Form::label('teste', 'Nome:') !!}
+				{!! Form::select('teste',  array(), null, ['class' => 'form-control select2-ajax']) !!}
 			</div>
 
 			<!-- Nome Form Input -->
@@ -69,5 +75,7 @@
 			</div>
 			{!! Form::close() !!}
 		</div>
-	
+
+		@include('/components/form/select2')
+			
 @endsection

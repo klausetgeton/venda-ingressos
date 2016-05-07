@@ -49,9 +49,6 @@ Route::group(['middleware' => ['auth']], function () {
     });
 });
 
-Route::get('teste', ['as'=>'teste',	'middleware' => 'role:admin',	'uses'=>'UsersController@teste']);
-
-Route::get('teste-ajax/{model}/{search_column}/{textoconsulta?}', ['as'=>'teste.ajax', 'middleware' => 'role:admin','uses'=>'UsersController@testeAjax']);
 
 Route::get('/permission.denied', function () {
     return view('errors.permissiondenied');
@@ -61,3 +58,9 @@ Route::get('/datatables.data/{model}', [
     'as' => 'datatables.data', 
     'uses' => 'DatatablesController@anyData'
 ]);
+
+
+Route::get('select2.data/{model}/{column}', ['as'=>'select2.data', 'middleware' => 'role:admin','uses'=>'Select2Controller@getData']);
+
+
+Route::get('teste', ['as'=>'teste',	'middleware' => 'role:admin',	'uses'=>'UsersController@teste']);

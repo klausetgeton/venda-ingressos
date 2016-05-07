@@ -9,7 +9,7 @@
 				<h4 class="modal-title">Busca</h4>
 			</div>
 			<div class="modal-body">			
-				<table id="resultsTable" class="table">
+				<table id="resultsTable" class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
 							<th>Id</th>
