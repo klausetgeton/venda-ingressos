@@ -19,8 +19,7 @@ class DatatablesController extends Controller
     	$fullModalClass['User'] = 'App\Model\User';
     	$fullModalClass['Role'] = 'Bican\Roles\Models\Role';
 
-    	$users = $fullModalClass[$model]::query();
-        return Datatables::of($users)        	
-        	->make(true);
+    	$result = $fullModalClass[$model]::query();
+        return Datatables::of($result)->make(true);
     }
 }
