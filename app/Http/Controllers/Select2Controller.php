@@ -17,9 +17,11 @@ class Select2Controller extends Controller
 		$fullModalClass['User'] = 'App\Model\User';
     	$fullModalClass['Role'] = 'Bican\Roles\Models\Role';
 
-		$q = $request->input('q');			
+		$query = $request->input('q');			
 
-		return $fullModalClass[$model]::where($search_collumn, 'like' ,'%'. $q . '%')->get(['id', $search_collumn])->toJson();
+		$querySelector = $fullModalClass[$model]::where($search_collumn, 'like' ,"%{$query}%");
+
+		return $querySelector->get(['id', $search_collumn])->toJson();
 	}
 
 }
