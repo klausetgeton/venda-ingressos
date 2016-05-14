@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateLotesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,13 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('lotes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password', 60);            
-            $table->rememberToken();
+            $table->string('nome', 150);
+            $table->string('descricao', 150)->nullable();
+            $table->integer('quantidade');
+            $table->date('dt_inicio');
+            $table->date('dt_fim');
             $table->timestamps();
         });
     }
@@ -29,6 +30,7 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('users');
+        Schema::drop('lotes');
     }
 }
+
