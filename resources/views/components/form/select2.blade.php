@@ -1,9 +1,11 @@
+{{ Form::select($name, array(), $value, array_merge([], $attributes)) }}
+
 <script type="text/javascript">
 	$(".select2-ajax").select2({
-		multiple:true,
+		multiple:{{$is_multiple}},
 		minimumInputLength: 2,		
 		ajax: {
-			url: '{!! route('select2.data', ['model' => 'User', 'column' => 'name'] ) !!}',
+			url: '{!! route('select2.data', ['model' => $model, 'column' => $description_column] ) !!}',
 			dataType: 'json',
 			delay: 250,	    			   
 			data: function (params) {

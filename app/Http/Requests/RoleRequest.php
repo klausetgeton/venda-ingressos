@@ -24,8 +24,8 @@ class RoleRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required|max:100',
-            'slug' => 'required|max:30',            
+            'name' => ['required', 'max:100'],
+            'slug' => ['required', 'max:30', 'unique:roles' . ($this->id ? ',slug,'. $this->id : '')],       
         ];
     }
-}
+}   

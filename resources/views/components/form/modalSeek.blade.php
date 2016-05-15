@@ -1,3 +1,9 @@
+{!! Form::text($form_id_field, $value, ['class'=>'form-control', 'style'=>'width:10%;']) !!}
+
+{!! Form::label($form_description_field, ' ') !!}			
+{!! Form::text($form_description_field, null, ['class'=>'form-control', 'style'=>'width:80%;', 'disabled']) !!}
+<a class="btn btn-info" style="width:9%;" data-toggle="modal" data-target="#searchModal">Procurar</a>
+
 <!-- Modal -->
 <div id="searchModal" class="modal" role="dialog">
 	<div class="modal-dialog modal-lg">

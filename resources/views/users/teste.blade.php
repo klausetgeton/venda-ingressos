@@ -6,20 +6,7 @@
 		<div class="container">
 			<h1>Usuário</h1>		
 
-			@include('errors.list')
-
-
-			<?php
-			//variables used on the seek component
-			$model = "User";
-			$description_column = "name";
-			$form_id_field = 'gp_id';
-			$form_description_field = 'gp_name';
-
-			?>
-
-			@include('/components/form/modalSeek')
-			
+			@include('errors.list')			
 
 			@if (isset($user))
 				{!! Form::model($user, ['route' => ['users.update', $user->id], 'method' => 'put']) !!}				
@@ -28,25 +15,17 @@
 			@endif
 
 
-
 			<!-- Nome Form Input -->
 			<div class="form-group">
 			</div>
-
-			<!-- Nome Form Input -->
-			<div class="form-group form-inline">
-				{!! Form::label('gp_id', 'teste:') !!}			
-				<br>
-				{!! Form::text('gp_id', null, ['class'=>'form-control', 'style'=>'width:10%;']) !!}
-
-				{!! Form::label('gp_name', ' ') !!}			
-				{!! Form::text('gp_name', null, ['class'=>'form-control', 'style'=>'width:80%;', 'disabled']) !!}
-				<a class="btn btn-info" style="width:9%;" data-toggle="modal" data-target="#searchModal">Procurar	</a>
+			<div class="form-group">
+				{!! Form::label('testeid', 'teste do lookup:') !!}
+				{!! Form::modalSeek(null, 'testeid', 'testedescric', 'User', 'name' ,[]) !!}
 			</div>
 
 			<div class="form-group">
-				{!! Form::label('teste', 'Nome:') !!}
-				{!! Form::select('teste',  array(), null, ['class' => 'form-control select2-ajax']) !!}
+				{!! Form::label('teste', 'teste o Select2:') !!}
+				{!! Form::select2('teste', null, 'User', 'name', 'false', ['class' => 'form-control select2-ajax']) !!}
 			</div>
 
 			<!-- Nome Form Input -->
@@ -75,7 +54,6 @@
 			</div>
 			{!! Form::close() !!}
 		</div>
-
-		@include('/components/form/select2')
+		
 			
 @endsection
