@@ -15,6 +15,17 @@
 			@endif
 
 
+			<p>Categories:</p>
+            <ul>
+                @foreach($users as $c)
+                    <li>
+                        {{ Form::checkbox('users[]', $c->id) }}
+                        {{ Form::label('users-' . $c->id, $c->name) }}
+                    </li>
+                @endforeach
+            </ul>
+            <p>
+
 			<!-- Nome Form Input -->
 			<div class="form-group">
 			</div>

@@ -150,11 +150,17 @@ return [
          */
         Bican\Roles\RolesServiceProvider::class,
 
+        //laravelcollective
         Collective\Html\HtmlServiceProvider::class,
         
+        //OwenIt Auditing
         OwenIt\Auditing\AuditingServiceProvider::class,
 
-        App\Providers\FormServiceProvider::class
+        //caron form components
+        App\Providers\FormServiceProvider::class,
+
+        //cpf validator
+        ValidadorCpf\CpfServiceProvider::class
 
 
 

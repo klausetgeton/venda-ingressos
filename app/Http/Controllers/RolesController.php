@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use Bican\Roles\Models\Role;
 
-use App\Http\Requests\RoleRequest;
+use App\Http\Requests\RolesRequest;
 
 
 class RolesController extends Controller
@@ -24,7 +24,7 @@ class RolesController extends Controller
 		return view('roles.create');
 	}
 
-	public function store(RoleRequest $request)
+	public function store(RolesRequest $request)
 	{
 		Role::create($request->all());
 		session()->flash('message', 'ok');
@@ -38,7 +38,7 @@ class RolesController extends Controller
 		return view('roles.create',compact('role'));
 	}
 	
-	public function update(RoleRequest $request, $id)
+	public function update(RolesRequest $request, $id)
 	{
 		$role = Role::find($id)->update($request->all());
 		session()->flash('message', 'ok');

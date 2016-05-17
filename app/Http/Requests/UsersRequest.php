@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class RoleRequest extends Request
+class UsersRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,10 @@ class RoleRequest extends Request
     public function rules()
     {
         return [
-            'name' => ['required', 'max:100'],
-            'slug' => ['required', 'max:30', 'unique:roles' . ($this->id ? ',slug,'. $this->id : '')],       
+            'name'  => ['required'],
+            'rg'    => ['max:10', 'unique:users' . ($this->id ? ',rg,'. $this->id : '')],
+            'cpf'   => ['max:14', 'unique:users' . ($this->id ? ',cpf,'. $this->id : '')],
+            'email' => ['email', 'max:100', 'required', 'unique:users' . ($this->id ? ',email,'. $this->id : '')],            
         ];
     }
-}   
+}

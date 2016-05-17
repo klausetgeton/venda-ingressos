@@ -10,7 +10,8 @@
         "bican/roles": "2.1.*",
         "laravelcollective/html": "5.2.*",
         "owen-it/laravel-auditing": "^2.2",
-        "yajra/laravel-datatables-oracle": "^6.11"
+        "yajra/laravel-datatables-oracle": "^6.11",
+        "jailtonsc/validador-cpf-laravel": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

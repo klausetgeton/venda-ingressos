@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Http\Requests\UsersRequest;
+use Hash;
 use App\Model\User;
 
 class UsersController extends Controller
@@ -11,7 +12,9 @@ class UsersController extends Controller
 
 	public function teste()
 	{		
-		return view('users.teste');
+		$users = User::all();
+
+		return view('users.teste', compact('users'));
 	}
 
 
@@ -27,9 +30,10 @@ class UsersController extends Controller
 		return view('users.create');
 	}
 
-	public function store(Request $request)
-	{
-		User::create($request->all());
+	public function store(UsersRequest $request)
+	{	
+		$request['password'] = Hash::make($request['password']);
+		User::create($request->all());		
 		session()->flash('message', 'ok');
 		return redirect()->route('users.index');
 	}
@@ -42,7 +46,7 @@ class UsersController extends Controller
 	}
 
 	
-	public function update(Request $request, $id)
+	public function update(UsersRequest $request, $id)
 	{
 		$user = User::find($id)->update($request->all());
 		
