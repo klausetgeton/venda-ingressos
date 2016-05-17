@@ -17,14 +17,9 @@ class DatatablesController extends Controller
      */
     public function anyData($model = null)
     {
-<<<<<<< HEAD
-    	$fullModalClass['User'] = 'App\Model\User';
-    	$fullModalClass['Role'] = 'Bican\Roles\Models\Role';
-        $fullModalClass['Log']  = 'OwenIt\Auditing\Log';
-=======
     	$fullModalClass['User'] = ['App\Model\User', ['id', 'name', 'email']];
     	$fullModalClass['Role'] = ['Bican\Roles\Models\Role', ['id', 'name']];
->>>>>>> 66673303c4ad2a334587d3d766c5c9867bf702f0
+        $fullModalClass['Log']  = ['OwenIt\Auditing\Log', ['id', 'name']];
 
     	$result = $fullModalClass[$model][0]::get($fullModalClass[$model][1]);
         return Datatables::of($result)->make(true);
