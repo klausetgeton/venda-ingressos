@@ -16,10 +16,10 @@ class DatatablesController extends Controller
      */
     public function anyData($model = null)
     {
-    	$fullModalClass['User'] = 'App\Model\User';
-    	$fullModalClass['Role'] = 'Bican\Roles\Models\Role';
+    	$fullModalClass['User'] = ['App\Model\User', ['id', 'name', 'email']];
+    	$fullModalClass['Role'] = ['Bican\Roles\Models\Role', ['id', 'name']];
 
-    	$result = $fullModalClass[$model]::query();
+    	$result = $fullModalClass[$model][0]::get($fullModalClass[$model][1]);
         return Datatables::of($result)->make(true);
     }
 }

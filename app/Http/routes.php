@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::put('roles/update/{id}',['as'=>'roles.update','middleware' => 'role:admin', 'uses'=>'RolesController@update']);
 		Route::get('roles/delete/{id}',['as'=>'roles.delete', 'middleware' => 'role:admin', 'uses'=>'RolesController@delete']);	
 
+
 		Route::get('users', ['as'=>'users.index',	'middleware' => 'role:admin',	'uses'=>'UsersController@index']);
 		Route::get('users/create', ['as'=>'users.create', 'middleware' => 'role:admin', 'uses'=>'UsersController@create']);
 		Route::post('users/store', ['as'=>'users.store', 'middleware' => 'role:admin','uses'=>'UsersController@store']);
@@ -46,6 +47,11 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::put('users/update/{id}',['as'=>'users.update', 'middleware' => 'role:admin', 'uses'=>'UsersController@update']);
 		Route::get('users/delete/{id}',['as'=>'users.delete', 'middleware' => 'role:admin', 'uses'=>'UsersController@delete']);	
 
+		Route::get('permissions/{type?}', ['as'=>'permissions.index',	'middleware' => 'role:admin',	'uses'=>'PermissionsController@index']);
+		Route::get('permissions/create/{type?}', ['as'=>'permissions.create', 'middleware' => 'role:admin', 'uses'=>'PermissionsController@create']);
+		Route::post('permissions/store/{type?}', ['as'=>'permissions.store',	'middleware' => 'role:admin',	'uses'=>'PermissionsController@store']);
+		Route::get('permissions/edit/{type?}/{id?}', ['as'=>'permissions.edit', 'middleware' => 'role:admin','uses'=>'PermissionsController@edit']);
+		
     });
 });
 
@@ -59,6 +65,10 @@ Route::get('/datatables.data/{model}', [
     'uses' => 'DatatablesController@anyData'
 ]);
 
+Route::get('/seek/{model?}/{search_column?}/{id?}', [
+	'as' => 'seek.data',
+	'uses' => 'SeekController@findById'
+]);
 
 Route::get('select2.data/{model}/{column}', ['as'=>'select2.data', 'middleware' => 'role:admin','uses'=>'Select2Controller@getData']);
 
