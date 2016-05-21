@@ -73,4 +73,20 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->belongsToMany('Bican\Roles\Models\Permission', 'permission_user')->withTimestamps();
     }
+
+    /**
+    * Get the IngressosVendidos for the user
+    */
+    public function ingressos_vendidos()
+    {
+        return $this->hasMany('App\Model\IngressoVendido');
+    }   
+
+       /**
+    * Get the eventos_administrados for the user
+    */
+    public function eventos_administrados()
+    {    
+        return $this->belongsToMany('App\Model\Eventos', 'administradores_evento');
+    }
 }

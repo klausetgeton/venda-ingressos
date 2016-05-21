@@ -33,7 +33,12 @@ class UsersController extends Controller
 	public function store(UsersRequest $request)
 	{	
 		$request['password'] = Hash::make($request['password']);
-		User::create($request->all());		
+
+		$user = User::create($request->all());		
+
+		$user->roles()->detach();
+		$user->roles()->attach($request->roles);
+
 		session()->flash('message', 'ok');
 		return redirect()->route('users.index');
 	}
@@ -48,7 +53,11 @@ class UsersController extends Controller
 	
 	public function update(UsersRequest $request, $id)
 	{
+	
 		$user = User::find($id)->update($request->all());
+
+		User::find($id)->roles()->detach();
+		$user = User::find($id)->roles()->attach($request->roles);
 		
 		session()->flash('message', 'ok');
 		return redirect()->route('users.index');

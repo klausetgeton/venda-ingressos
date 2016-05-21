@@ -1,8 +1,10 @@
-{!! Form::number($form_id_field, $value, ['class'=>'form-control', 'style'=>'width:10%;']) !!}
+<div class="form-inline">	
+	{!! Form::number($form_id_field, $value, ['class'=>'form-control', 'style'=>'width:10%;']) !!}
 
-{!! Form::label($form_description_field, ' ') !!}
-{!! Form::text($form_description_field, null, ['class'=>'form-control', 'style'=>'width:80%;', 'disabled']) !!}
-<a class="btn btn-info" style="width:9%;" data-toggle="modal" data-target="#searchModal">Procurar</a>
+	{!! Form::label($form_description_field, ' ') !!}
+	{!! Form::text($form_description_field, null, ['class'=>'form-control', 'style'=>'width:80%;', 'disabled']) !!}
+	<a class="btn btn-info" style="width:9%;" data-toggle="modal" data-target="#searchModal">Procurar</a>
+</div>
 
 <!-- Modal -->
 <div id="searchModal" class="modal" role="dialog">
@@ -68,19 +70,14 @@
 
 	function selectFromModalTable(id, text) {
 		//change value
-		$( "#{!! $form_id_field !!}" ).val(id).trigger('value_changed');
-		$( "#{!! $form_description_field !!}" ).val(text).trigger('value_changed');
-
-		//inform the value change
-		$("#{!! $form_id_field !!}").trigger('change');
-		$("#{!! $form_description_field !!}").trigger('change');
-
-
-		$( "#{!! $form_id_field !!}" ).trigger("change");
-		$( "#{!! $form_description_field !!}" ).trigger("change");
-
+		$( "#{!! $form_id_field !!}" ).val(id);
+		$( "#{!! $form_description_field !!}" ).val(text);
+		
 		//hide modal window
 		$( "#searchModal" ).modal("hide");
+		
+		//aditional calls
+		{{$adc_call}}
 	}
 
 	$( "#{{$form_id_field}}" ).change(function() {

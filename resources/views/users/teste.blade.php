@@ -14,29 +14,24 @@
 				{!! Form::open(array('action' => 'UsersController@store')) !!}
 			@endif
 
-
-			<p>Categories:</p>
-            <ul>
-                @foreach($users as $c)
-                    <li>
-                        {{ Form::checkbox('users[]', $c->id) }}
-                        {{ Form::label('users-' . $c->id, $c->name) }}
-                    </li>
-                @endforeach
-            </ul>
-            <p>
-
 			<!-- Nome Form Input -->
 			<div class="form-group">
 			</div>
 			<div class="form-group">
 				{!! Form::label('testeid', 'teste do lookup:') !!}
-				{!! Form::modalSeek(null, 'testeid', 'testedescric', 'User', 'name' ,[]) !!}
+				{!! Form::modalSeek(null, 'testeid', 'testedescric', 'User', 'name', '', []) !!}
 			</div>
 
+
+			<?php
+				$ar = array(
+					'0' => array( 'id' => 'L', 'name' => 'Large'),
+					'1' => array('id' => 'S', 'name' => 'Small') 
+					);				
+			?>
 			<div class="form-group">
 				{!! Form::label('teste', 'teste o Select2:') !!}
-				{!! Form::select2('teste', null, 'User', 'name', 'false', ['class' => 'form-control select2-ajax']) !!}
+				{!! Form::select2('teste', $ar, array('L', 'S'), 'User', 'name', 'true', ['']) !!}
 			</div>
 
 			<!-- Nome Form Input -->

@@ -40,6 +40,11 @@
 			{!! Form::label('email', 'Email:') !!}
 			{!! Form::text('email', Input::old('email'), ['class'=>'form-control']) !!}
 			</div>
+		
+			<div class="form-group">
+				{!! Form::label('roles', 'Grupos:') !!}
+				{!! Form::select2('roles', isset($user) ? $user->roles()->get() : array(), 'Role', 'name', 'true', ['']) !!}
+			</div>
 			
 			@if (!isset($user))
 				<div class="form-group">

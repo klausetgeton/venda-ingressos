@@ -1,4 +1,8 @@
-{{ Form::select($name, array(), $value, array_merge([], $attributes)) }}
+<select id="{{$name}}[]" name="{{$name}}[]" multiple class="form-control select2-ajax">
+	@foreach ($value as $item)					
+    	<option value="{{$item->id}}" selected>{{$item->$description_column}}</option>		          	    	    
+   	@endforeach
+</select>
 
 <script type="text/javascript">
 	$(".select2-ajax").select2({

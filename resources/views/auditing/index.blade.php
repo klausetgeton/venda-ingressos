@@ -9,29 +9,17 @@
 		<br />
 		<br />
 
-		<table class="table table-striped table-bordered table-hover">
+		<table id="dList" class="table table-striped table-bordered table-hover">
 			<thead>
 				<tr>
-					<th>Id</th>
 					<th>Usuário</th>
+					<th>Id do registro</th>
 					<th>Valor Antigo</th>
 					<th>Valor Novo</th>
 					<th>Tabela</th>
 					<th>Data</th>
 				</tr>
-			</thead>
-			<tbody>
-				@foreach($logs as $log)
-					<tr>
-						<td>{{ $log->id }}</td>
-						<td>{{ $log->user->id }} - {{ $log->user->name }}</td>
-						<td>{{ json_encode($log->old_value) }}</td>
-						<td>{{ json_encode($log->new_value) }}</td>
-						<td>{{ $log->owner_type }}</td>
-						<td>{{ $log->created_at->format('d/m/Y H:i:s') }}</td>
-					</tr>
-				@endforeach
-			</tbody>
+			</thead>			
 		</table>
 	</div>
 
@@ -42,4 +30,39 @@
 @endrole
 
 
+<script type="text/javascript">
+	$(function() {
+		try{
+			loadTable();			
+		}catch(err){	    		
+			$.getScript('/js/jquery.dataTables.min.js', function() {
+				$.getScript('/js/dataTables.bootstrap.min.js', function() {
+					loadTable();
+				});
+			});
+		}
+	});
+
+	<?php $model = "Log";	 ?>
+	function loadTable(){			
+		$('#dList').DataTable({
+			processing: true,
+			serverSide: true,
+			ajax: '{!! route('datatables.data', ['model' => $model]) !!}',
+			columns: [
+			{ data: 'user.name', name: 'user.name' },
+			{ data: 'owner_id', name: 'owner_id' },
+			{ data: 'old_value', name: 'old_value' },	
+			{ data: 'new_value', name: 'new_value' },	
+			{ data: 'owner_type', name: 'owner_type' },				
+			{ data: 'created_at', name: 'created_at' },							
+			],
+			"language": {
+				"url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese-Brasil.json"
+			},
+			"order": [[ 0, "desc" ]],
+		});	
+	}
+
+</script>
 @endsection

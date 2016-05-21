@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\User;
 use App\Model\Role;
 use Illuminate\Http\Request;
+use App\Http\Requests\PermissionsRequest;
 use App\Http\Requests;
 use Bican\Roles\Models\Permission;
 
@@ -22,7 +23,7 @@ class PermissionsController extends Controller
         return view('permissions.create', compact('permissions', 'type'));
     }
 
-    public function store(Request $request, $type)
+    public function store(PermissionsRequest $request, $type)
     {
         if($type == "user")
         {
@@ -44,7 +45,7 @@ class PermissionsController extends Controller
         }
 
         $permissions = Permission::all();
-        
+        session()->flash('message', 'ok');
         return view('permissions.create', compact('permissions', 'type', 'object'));
     }
 

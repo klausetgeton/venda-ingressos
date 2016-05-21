@@ -4,15 +4,27 @@
 
     <div class="container">
         <h1>Permissões do {{$type == "user" ? "Usuário" : "Grupo"}}</h1>
-        <br/>
-        <br/>
+
+        @if ($errors->any())
+            <ul class="alert alert-warning">
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
+
+        @if (session('message') == 'ok')
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Operação realizada com sucesso.
+            </div>
+        @endif
 
         {!! Form::open(array('action' => array('PermissionsController@store', $type ))) !!}
 
-
         <div class="form-group">
-            {!! Form::label('o_id', 'Usuário:') !!}
-            {!! Form::modalSeek((isset($object) ?$object->id :null ), 'o_id', 'o_name', ($type == "user" ? "User" : "Role"), 'name' ,[]) !!}
+            {{ Form::label('o_id', ($type == "user" ? "Usuário" : "Grupo") . ':') }}
+            {!! Form::modalSeek((isset($object) ?$object->id :null ), 'o_id', 'o_name', ($type == "user" ? "User" : "Role"), 'name' , 'loadPermissions();', []) !!}
         </div>
 
         <table class="table table-striped table-bordered table-hover">
@@ -29,22 +41,21 @@
 
             <?php $models = array("User", "Permission", "Role") ?>
 
-
-            @for ($m = 0; $m < count($models); $m++)
+            @foreach ($models as $model)
                 <tr>
                     <td>
-                        {{ $models[$m]}}
+                        {{$model}}
                     </td>
-                    @for($p = 0; $p < count($permissions); $p++)
-                        @if ($permissions[$p]->model == $models[$m] )
+                    @foreach($permissions as $permission)
+                        @if ($permission->model == $model )
                             <td>
-                                {{ Form::checkbox('permissions[]',$permissions[$p]->id, ( isset($object) ? $object->hasThisP($permissions[$p]->id) : null), null) }}
-                                {{ $permissions[$p]->name }}
+                                {{ Form::checkbox('permissions[]',$permission->id, ( isset($object) ? $object->hasThisP($permission->id) : null), null) }}
+                                {{ $permission->name }}
                             </td>
                         @endif
-                    @endfor
+                    @endforeach
                 </tr>
-            @endfor
+            @endforeach
 
             </tbody>
         </table>
@@ -58,18 +69,30 @@
     <script>
         $( "#o_id" ).change(function() {
             var id = $( "#o_id" ).val();
+            var name = $( "#o_name" ).val();
 
-            if(id > 0)
+            if(id > 0 && name != '')
             {
-                window.location.replace("{{route('permissions.edit')}}/{{$type}}/" + id);
+                loadPermissions(id);
             }
         });
 
 
-        $( "#o_id" ).on('value_changed', function(e){
-            console.log('value changed to '+$(this).val());
-            window.location.replace("{{route('permissions.edit')}}/{{$type}}/" + id);
+        function loadPermissions (id)
+        {            
+            var id = $( "#o_id" ).val();
+            var name_length = $("#o_name").val().trim().length;
+            
+            if(id > 0 && name_length > 0 )
+            {
+                id = $( "#o_id" ).val();
+                window.location.replace("{{route('permissions.edit')}}/{{$type}}/" + id);
+            }
+        }
+
+        $( document ).ready(function() 
+        {
+            $( "#o_name" ).val("{{ isset($object) ? $object->name : null }}");
         });
     </script>
 @endsection
-
