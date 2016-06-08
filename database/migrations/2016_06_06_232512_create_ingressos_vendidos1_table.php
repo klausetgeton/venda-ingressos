@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterModalidadesLoteTable extends Migration
+class CreateIngressosVendidos1Table extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,10 @@ class AlterModalidadesLoteTable extends Migration
      */
     public function up()
     {
-        Schema::table('modalidades_lote', function (Blueprint $table) {
-
-            $table->dropForeign(['eventos_id']);
-
-            $table->dropColumn('eventos_id');
-
-            $table->integer('lotes_id')->unsigned()->index();                   
-
+        Schema::table('ingressos_vendidos', function (Blueprint $table) {
+            $table->integer('lotes_id')->index();
             $table->foreign('lotes_id')->references('id')->on('lotes');
+            $table->date('data_pagamento')->nullable();
         });
     }
 
@@ -31,7 +26,7 @@ class AlterModalidadesLoteTable extends Migration
      */
     public function down()
     {
-        Schema::table('modalidades_lote', function (Blueprint $table) {
+        Schema::table('ingressos_vendidos', function (Blueprint $table) {
             //
         });
     }

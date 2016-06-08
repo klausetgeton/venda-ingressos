@@ -4,11 +4,8 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-use OwenIt\Auditing\AuditingTrait;
-
-class Evento extends Model
-{
-    use AuditingTrait;
+class Evento extends AuditedObject
+{    
 
     /**
      * The database table used by the model.
@@ -22,7 +19,7 @@ class Evento extends Model
      *
      * @var array
      */
-    protected $fillable = ['descricao', 'datahora', 'nome'];
+    protected $fillable = ['descricao', 'data', 'hora', 'nome', 'locais_id', 'valor_masculino', 'valor_feminino', 'completo'];
 
    /**
     * Get the lotes for the evento
@@ -30,7 +27,7 @@ class Evento extends Model
     public function lotes()
     {
         return $this->hasMany('App\Model\Lote');
-    }
+    }   
 
     /**
     * Get the patrocinadores for the evento
@@ -48,14 +45,13 @@ class Evento extends Model
         return $this->hasMany('App\Model\Desconto');
     }
 
-    /**
-    * Get the PossibilidadesCompra for the evento
+   /**
+    * Get the local associated with the evento.
     */
-    public function possibilidades_compra()
-    {    
-        return $this->belongsToMany('App\Model\PossibilidadesCompra', 'possibilidades_evento');
+    public function local()
+    {
+        return $this->belongsTo('App\Model\Local', 'locais_id');
     }
-
    /**
     * Get the administradores for the evento
     */

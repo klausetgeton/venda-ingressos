@@ -61,34 +61,51 @@
                     <li><a href="{{ url('/home') }}">Home</a></li>
                 </ul>
 
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/auth/login') }}">Login</a></li>
-                </ul>
+                @if (Auth::guest())
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ url('/auth/login') }}">Login</a></li>
+                    </ul>
+                @endif
 
-                @role('admin')
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ route('roles.index') }}">Grupos</a></li>
-                </ul>
+                @role('admin')                
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Eventos<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="{{ route('events.index') }}">Eventos</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
 
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ route('users.index') }}">Usuários</a></li>
-                </ul>
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ route('roles.index') }}">Grupos</a></li>
+                    </ul>
 
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            Permissões<span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ route('permissions.index') }}/user/">Permissões - Usuários</a></li>
-                            <li><a href="{{ route('permissions.index') }}/role/">Permissões - Grupos</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ route('users.index') }}">Usuários</a></li>
+                    </ul>
 
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ route('auditing.index') }}">Auditoria</a></li>
-                </ul>
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Permissões<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="{{ route('permissions.index') }}/user/">Permissões - Usuários</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('permissions.index') }}/role/">Permissões - Grupos</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ route('auditing.index') }}">Auditoria</a></li>
+                    </ul>
                 @endrole
 
                 <!-- Right Side Of Navbar -->

@@ -4,11 +4,8 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-use OwenIt\Auditing\AuditingTrait;
-
-class Lote extends Model
+class Lote extends AuditedObject
 {
-	use AuditingTrait;
 
     /**
      * The database table used by the model.
@@ -22,16 +19,9 @@ class Lote extends Model
      *
      * @var array
      */
-    protected $fillable = ['descricao', 'data_inicio', 'nome', 'data_fim', 'quantidade', 'eventos_id'];
+    protected $fillable = ['descricao', 'dt_inicio', 'nome', 'dt_fim', 'quantidade', 'eventos_id', 'valor_masculino', 'valor_feminino'];
 
-    /**
-    * Get the modalidades for the lote.
-    */
-    public function modalidades()
-    {
-        return $this->hasMany('App\Model\ModalidadeLote');
-    }
-    
+        
     /**
     * Get the descontos for the lote.
     */
@@ -45,6 +35,6 @@ class Lote extends Model
     */
     public function evento()
     {
-        return $this->belongsTo('App\Model\Evento');
+        return $this->belongsTo('App\Model\Evento', 'eventos_id');
     }
 }

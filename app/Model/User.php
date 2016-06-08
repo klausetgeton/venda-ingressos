@@ -22,7 +22,6 @@ class User extends Model implements AuthenticatableContract,
     use Authenticatable,  CanResetPassword, HasRoleAndPermission;
 
     use AuditingTrait;
-
     /**
      * The database table used by the model.
      *

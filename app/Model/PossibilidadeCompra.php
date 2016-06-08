@@ -3,11 +3,10 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
-use OwenIt\Auditing\AuditingTrait;
 
 class PossibilidadeCompra extends Model
 {
-	use AuditingTrait;
+	
 
     /**
      * The database table used by the model.
@@ -21,13 +20,13 @@ class PossibilidadeCompra extends Model
      *
      * @var array
      */
-    protected $fillable = ['posicao_x', 'posicao_y'];
+    protected $fillable = ['posicao_x', 'nome', 'disponivel', 'posicao_y', 'locais_id'];
 
     /**
     * Get the eventos for the PossibilidadeCompra
     */
-    public function eventos()
+    public function locais()
     {    
-        return $this->belongsToMany('App\Model\Evento', 'possibilidades_evento');
+        return $this->belongsToMany('App\Model\Local');
     }
 }

@@ -1,9 +1,11 @@
 <div class="form-inline">	
 	{!! Form::number($form_id_field, $value, ['class'=>'form-control', 'style'=>'width:10%;']) !!}
-
 	{!! Form::label($form_description_field, ' ') !!}
 	{!! Form::text($form_description_field, null, ['class'=>'form-control', 'style'=>'width:80%;', 'disabled']) !!}
-	<a class="btn btn-info" style="width:9%;" data-toggle="modal" data-target="#searchModal">Procurar</a>
+	<a class="btn btn-info" style="width:9%;" data-toggle="modal" data-target="#searchModal">
+		<i class="fa fa-search" aria-hidden="true"></i>
+		Procurar
+	</a>
 </div>
 
 <!-- Modal -->
@@ -17,7 +19,7 @@
 				<h4 class="modal-title">Busca</h4>
 			</div>
 			<div class="modal-body">
-				<table id="resultsTable" class="table table-striped table-bordered table-hover">
+				<table id="resultsTable" class="table table-striped  table-hover">
 					<thead>
 					<tr>
 						<th>Id</th>
@@ -39,17 +41,17 @@
 <script>
 	$(function() {
 		try{
-			loadTable();
+			loadModalTable();
 		}catch(err){
 			$.getScript('/js/jquery.dataTables.min.js', function() {
 				$.getScript('/js/dataTables.bootstrap.min.js', function() {
-					loadTable();
+					loadModalTable();
 				});
 			});
 		}
 	});
 
-	function loadTable(){
+	function loadModalTable(){
 		$('#resultsTable').DataTable({
 			processing: true,
 			serverSide: true,
@@ -58,7 +60,7 @@
 				{ data: 'id', name: 'id' },
 				{ data: '{!! $description_column !!}', name: '{!! $description_column !!}' },
 				{ data: null, render: function ( data, type, row ) {
-					return "<a href=\"javascript:selectFromModalTable(\'" +data.id + "\',\'" +data.name+ "\');\" class=\"btn btn-default btn-sm\" role=\"button\">Selecionar</a>"
+					return "<a href=\"javascript:selectFromModalTable(\'" +data.id + "\',\'" +data.{{$description_column}}+ "\');\" class=\"btn btn-default btn-sm\" role=\"button\">Selecionar</a>"
 				}, orderable: false, "bSearchable": false },
 			],
 			"language": {
@@ -91,7 +93,7 @@
 				success: function (data) {
 					if (data.length == 1) {
 						$.each(data, function (index, element) {
-									selectFromModalTable(element.id, element.name);
+									selectFromModalTable(element.id, element.{{$description_column}});
 								}
 						);
 					}

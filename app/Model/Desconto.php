@@ -3,12 +3,10 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
-use OwenIt\Auditing\AuditingTrait;
+use App\Model\AuditedObject;
 
-class Desconto extends Model
-{
-   
-    use AuditingTrait;
+class Desconto extends AuditedObject
+{   
 
     /**
      * The database table used by the model.
@@ -22,23 +20,15 @@ class Desconto extends Model
      *
      * @var array
      */
-    protected $fillable = ['descricao', 'hash', 'porcentagem', 'quantidade', 'eventos_id', 'lotes_id'];
+    protected $fillable = ['descricao', 'hash', 'porcentagem', 'quantidade', 'eventos_id'];
 
     /**
     * Get the evento that owns the desconto.
     */
     public function evento()
     {
-        return $this->belongsTo('App\Model\Evento');
-    }
-
-    /**
-    * Get the lote that owns the desconto.
-    */
-    public function lote()
-    {
-        return $this->belongsTo('App\Model\Lote');
-    }
+        return $this->belongsTo('App\Model\Evento', 'eventos_id');
+    }   
 
    /**
     * Get the ingressos_vendidos for the desconto

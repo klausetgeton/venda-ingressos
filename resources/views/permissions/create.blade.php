@@ -27,7 +27,7 @@
             {!! Form::modalSeek((isset($object) ?$object->id :null ), 'o_id', 'o_name', ($type == "user" ? "User" : "Role"), 'name' , 'loadPermissions();', []) !!}
         </div>
 
-        <table class="table table-striped table-bordered table-hover">
+        <table class="table table-striped  table-hover">
             <thead>
             <tr>
                 <th>Tabela</th>

@@ -16,7 +16,7 @@
 	<br />
 	<br />
 
-	<table id="dList" class="table table-striped table-bordered table-hover">
+	<table id="dList" class="table table-striped table-hover">
 		<thead>
 			<tr>
 				<th>ID</th>
