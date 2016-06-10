@@ -2,8 +2,6 @@
 
 @section('content')
 
-	<meta name="_token" content="{{ csrf_token() }}" />
-
 	<div class="container">
 
 		<h1>Lotes</h1>

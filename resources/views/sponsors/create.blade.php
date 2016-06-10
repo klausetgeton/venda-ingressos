@@ -194,7 +194,7 @@
 
 		    $.ajax({
 		        type: 'POST',
-		        url: 'sponsors/delete/' + id,
+		        url: '/admin/sponsors/delete/' + id,
 		        dataType: 'json',
 		        data: {_token:$('meta[name="_token"]').attr('content')},
 		        success: function(data)
@@ -217,7 +217,7 @@
 
 		    $.ajax({
 		        type: 'POST',
-		        url: 'sponsors/edit/' + id,
+		        url: '/admin/sponsors/edit/' + id,
 		        dataType: 'json',
 		        data: {_token:$('meta[name="_token"]').attr('content')},
 		        success: function(data)

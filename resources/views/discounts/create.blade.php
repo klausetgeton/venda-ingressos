@@ -56,7 +56,7 @@
 			</div>
 		{!! Form::close() !!}
 
-		<table id="dList" class="table table-striped table-hover">
+		<table id="dList" class="table table-striped table-hover dt-responsive nowrap">
 			<thead>
 				<tr>
 					<th>ID</th>
@@ -216,7 +216,7 @@
 
 		    $.ajax({
 		        type: 'POST',
-		        url: 'discounts/delete/' + id,
+		        url: '/admin/discounts/delete/' + id,
 		        dataType: 'json',
 		        data: {_token:$('meta[name="_token"]').attr('content')},
 		        success: function(data)
@@ -242,7 +242,7 @@
 
 		    $.ajax({
 		        type: 'POST',
-		        url: 'discounts/edit/' + id,
+		        url: '/admin/discounts/edit/' + id,
 		        dataType: 'json',
 		        data: {_token:$('meta[name="_token"]').attr('content')},
 		        success: function(data)

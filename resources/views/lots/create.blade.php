@@ -259,7 +259,7 @@
 
 		    $.ajax({
 		        type: 'POST',
-		        url: 'lots/delete/' + id,
+		        url: '/admin/lots/delete/' + id,
 		        dataType: 'json',
 		        data: {_token:$('meta[name="_token"]').attr('content')},
 		        success: function(data)
@@ -285,7 +285,7 @@
 
 		    $.ajax({
 		        type: 'POST',
-		        url: 'lots/edit/' + id,
+		        url: '/admin/lots/edit/' + id,
 		        dataType: 'json',
 		        data: {_token:$('meta[name="_token"]').attr('content')},
 		        success: function(data)
