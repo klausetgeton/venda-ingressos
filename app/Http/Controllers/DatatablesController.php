@@ -25,33 +25,33 @@ class DatatablesController extends Controller
         $fullModalClass['Patrocinador'] = ['App\Model\Patrocinador', ['id', 'nome', 'descricao', 'eventos_id']];
         $fullModalClass['Desconto'] = ['App\Model\Desconto', ['id', 'descricao', 'hash', 'quantidade' ,'porcentagem','eventos_id']];
         $fullModalClass['Lote'] = ['App\Model\Lote', ['id', 'descricao', 'dt_inicio', 'nome', 'dt_fim', 'quantidade', 'eventos_id', 'valor_masculino', 'valor_feminino']];
-        
-        switch ($model) 
-        {            
-            case 'Evento':      
-                $result = $fullModalClass[$model][0]::select($fullModalClass[$model][1])->with('local')->get();                            
+
+        switch ($model)
+        {
+            case 'Evento':
+                $result = $fullModalClass[$model][0]::select($fullModalClass[$model][1])->with('local')->get();
                 return Datatables::of($result)
-                                ->editColumn('data', function ($obj) 
-                                    {                                                             
+                                ->editColumn('data', function ($obj)
+                                    {
                                         return date('d-m-Y', strtotime($obj->data));
-                                    })                                
+                                    })
                                 ->make(true);
 
-            case 'Patrocinador':      
+            case 'Patrocinador':
                 if($request->get('eventos_id'))
                 {
                     $result = $fullModalClass[$model][0]::select($fullModalClass[$model][1])->where('eventos_id', (int) $request->get('eventos_id'))->get();
                 }else
                 {
-                    $result = $fullModalClass[$model][0]::select($fullModalClass[$model][1])->get();
+                    $result = $fullModalClass[$model][0]::select($fullModalClass[$model][1])->with('evento')->get();
                 }
 
                 return Datatables::of($result)->make(true);
                 break;
-            
-            case 'Desconto':     
+
+            case 'Desconto':
                 if($request->get('eventos_id'))
-                {            
+                {
                     $result = $fullModalClass[$model][0]::select($fullModalClass[$model][1])->where('eventos_id', (int) $request->get('eventos_id'))->with('evento')->get();
                 }else
                 {
@@ -59,28 +59,42 @@ class DatatablesController extends Controller
                 }
 
                 return Datatables::of($result)
-                                ->editColumn('porcentagem', function ($obj) 
-                                    {                     
+                                ->editColumn('porcentagem', function ($obj)
+                                    {
                                         return $obj->porcentagem . " %";
                                     })
                                 ->make(true);
                 break;
 
             case 'Lote':
-                $result = $fullModalClass[$model][0]::select($fullModalClass[$model][1])->where('eventos_id', (int) $request->get('eventos_id'))->with('evento')->get();            
-                
+                if($request->get('eventos_id'))
+                {
+                    $result = $fullModalClass[$model][0]::select($fullModalClass[$model][1])->where('eventos_id', (int) $request->get('eventos_id'))->with('evento')->get();
+                }else
+                {
+                    $result = $fullModalClass[$model][0]::select($fullModalClass[$model][1])->with('evento')->get();
+                }
+
                 return Datatables::of($result)
-                                ->editColumn('porcentagem', function ($obj) 
-                                    {                     
+                                ->editColumn('porcentagem', function ($obj)
+                                    {
                                         return $obj->porcentagem . " %";
                                     })
-                                ->editColumn('valor_masculino', function ($obj) 
-                                    {                                                             
+                                ->editColumn('valor_masculino', function ($obj)
+                                    {
                                         return 'R$' . number_format($obj->valor_masculino, 2, ',', '.');;
                                     })
-                                ->editColumn('valor_feminino', function ($obj) 
-                                    {                                                             
+                                ->editColumn('valor_feminino', function ($obj)
+                                    {
                                         return 'R$' . number_format($obj->valor_feminino, 2, ',', '.');;
+                                    })
+                                ->editColumn('dt_inicio', function ($obj)
+                                    {
+                                        return date('d-m-Y', strtotime($obj->dt_inicio));
+                                    })
+                                ->editColumn('dt_fim', function ($obj)
+                                    {
+                                        return date('d-m-Y', strtotime($obj->dt_fim));
                                     })
                                 ->make(true);
                 break;
@@ -88,8 +102,8 @@ class DatatablesController extends Controller
 
             default:
                 $result = $fullModalClass[$model][0]::select($fullModalClass[$model][1])->get();
-                return Datatables::of($result)->make(true);    
+                return Datatables::of($result)->make(true);
                 break;
-        }                
+        }
     }
 }

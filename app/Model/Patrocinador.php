@@ -25,6 +25,6 @@ class Patrocinador extends Model
     */
     public function evento()
     {
-        return $this->belongsTo('App\Model\Evento');
+        return $this->belongsTo('App\Model\Evento', 'eventos_id');
     }
 }

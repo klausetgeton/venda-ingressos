@@ -19,7 +19,7 @@
 		@endif
 		
 		<div class="form-group">
-		{!! Form::label('name', 'Nome:') !!}
+		{!! Form::label('name', 'Nome:*') !!}
 		{!! Form::text('name', Input::old('name'), ['class'=>'form-control']) !!}
 		</div>
 
@@ -34,7 +34,7 @@
 		</div>
 
 		<div class="form-group">
-		{!! Form::label('email', 'Email:') !!}
+		{!! Form::label('email', 'Email:*') !!}
 		{!! Form::text('email', Input::old('email'), ['class'=>'form-control']) !!}
 		</div>
 	
@@ -45,7 +45,7 @@
 		
 		@if (!isset($user))
 			<div class="form-group">
-			{!! Form::label('password', 'Senha:') !!}
+			{!! Form::label('password', 'Senha:*') !!}
 			{!! Form::password('password', ['class'=>'form-control']) !!}
 			</div>
 		@endif

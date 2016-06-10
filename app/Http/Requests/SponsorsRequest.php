@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class EventsRequest extends Request
+class SponsorsRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,7 @@ class EventsRequest extends Request
     public function rules()
     {
         return [
-            'nome' => ['required', 'max:150', 'unique:locais' . ($this->id ? ',nome,'. $this->id : '')],                
-            'data' => ['required', 'date'],
-            'hora' => ['required', 'date_format:H:m'],
-            'locais_id' => ['required'],
+            'nome' => ['required', 'max:100'],
         ];
     }
 }

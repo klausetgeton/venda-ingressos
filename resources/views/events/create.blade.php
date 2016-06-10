@@ -1,13 +1,13 @@
 @extends('index')
 
-@section('content')	
+@section('content')
 
-	<div class="container">		
+	<div class="container">
 
 		<link rel="stylesheet" href="/css/breadcrumb.css">
 
 		<ol class="progtrckr">
-       		<li class="progtrckr-todo">Evento</li>		    
+       		<li class="progtrckr-todo">Evento</li>
        		<li class="progtrckr-todo">Patrocinadores</li>
        		<li class="progtrckr-todo">Lotes</li>
 		    <li class="progtrckr-todo">Descontos</li>
@@ -24,32 +24,32 @@
 		@endif
 
 		@if (isset($event))
-			{!! Form::model($event, ['route' => ['events.update', $event->id], 'method' => 'put']) !!}				
+			{!! Form::model($event, ['route' => ['events.update', $event->id], 'method' => 'put']) !!}
 		@else
 			{!! Form::open(array('action' => 'EventsController@store')) !!}
 		@endif
 
 		<!-- Nome Form Input -->
 		<div class="form-group">
-		{!! Form::label('nome', 'Nome:') !!}
+		{!! Form::label('nome', 'Nome:*') !!}
 		{!! Form::text('nome', Input::old('nome'), ['class'=>'form-control']) !!}
 		</div>
 
 		<!-- Data Form Input -->
 		<div class="form-group">
-		{!! Form::label('data', 'Data:') !!}
+		{!! Form::label('data', 'Data:*') !!}
 		{!! Form::date('data', Input::old('data'), ['class'=>'form-control']) !!}
 		</div>
 
 		<!-- hora Form Input -->
 		<div class="form-group">
-		{!! Form::label('hora', 'Hora:') !!}
+		{!! Form::label('hora', 'Hora:*') !!}
 		{!! Form::text('hora', Input::old('hora'), ['class'=>'form-control', 'placeholder' => 'hh:mm']) !!}
 		</div>
 
 		<!-- local Form Input -->
 		<div class="form-group">
-			{!! Form::label('locais_id', 'Local:') !!}
+			{!! Form::label('locais_id', 'Local:*') !!}
 			{!! Form::modalSeek(null, 'locais_id', 'locais_nome', 'Local', 'nome', '', []) !!}
 		</div>
 
@@ -58,9 +58,9 @@
 		{!! Form::label('descricao', 'Descrição:') !!}
 		{!! Form::textarea('descricao', Input::old('descricao'), ['class'=>'form-control']) !!}
 		</div>
-	
+
 		<div class="form-group">
-		{!! Form::submit('Próxima Etapa', ['class'=>'btn btn-primary']) !!}
+		{!! Form::button('Próxima Etapa <i class="fa fa-arrow-right" aria-hidden="true"></i>', array('type' => 'submit', 'class' => 'btn btn-primary')) !!}
 		</div>
 		{!! Form::close() !!}
 	</div>

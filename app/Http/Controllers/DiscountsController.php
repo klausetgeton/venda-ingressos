@@ -9,23 +9,26 @@ use App\Http\Requests\DiscountsRequest;
 
 class DiscountsController extends Controller
 {
-    
-	public function index()
-	{	
+
+    public function index()
+	{
+		return view('discounts.index');
+	}
+
+	public function create()
+	{
 		if(session()->has('event_multiple'))
 		{
-			$discounts = Desconto::all();
-
-			return view('discounts.index', compact('discounts'));
+			return view('discounts.create');
 		}else
 		{
-			return view('events.index');						
-		}	
+			return view('events.index');
+		}
 	}
 
     public function store(DiscountsRequest $request)
-	{		
-		$request->eventos_id == "" ? $request->merge(array('eventos_id' => NULL)) : "" ; 
+	{
+		$request->eventos_id == "" ? $request->merge(array('eventos_id' => NULL)) : "" ;
 
 		if($request->id)
 		{
@@ -37,10 +40,10 @@ class DiscountsController extends Controller
 			$discount->update($request->all());
 		}else
 		{
-			$discount = Desconto::create($request->all());		
+			$discount = Desconto::create($request->all());
 		}
-							
-		return response()->json('true');	
+
+		return response()->json('true');
 	}
 
 	public function edit($id)
@@ -49,32 +52,32 @@ class DiscountsController extends Controller
 
 		if (request()->ajax())
 		{
-			return response()->json($discount);			
+			return response()->json($discount);
 		}else
 		{
 			return view('discounts', compact('discount'));
 		}
 	}
-	
+
 	public function update(DiscountsRequest $request, $id)
 	{
 		$discount = Desconto::find($id)->update($request->all());
-	
+
 		session()->flash('message', 'ok');
 		return redirect()->route('discounts.index');
 	}
 
 	public function delete($id)
-	{		
+	{
 		Desconto::find($id)->delete();
 		session()->flash('message', 'ok');
 
 		if (request()->ajax())
 		{
-		 	return response()->json('true');	
+		 	return response()->json('true');
 		}else
 		{
 			return redirect()->route('discounts.index');
-		}	
+		}
 	}
 }

@@ -21,17 +21,17 @@
 
 			<!-- Nome Form Input -->
 			<div class="form-group">
-			{!! Form::label('nome', 'Nome:') !!}
+			{!! Form::label('nome', 'Nome:*') !!}
 			{!! Form::text('nome', Input::old('nome'), ['class'=>'form-control']) !!}
 			</div>
 
 			<div class="form-group">
-			{!! Form::label('qtd_x', 'Lugares na Horizontal:') !!}
+			{!! Form::label('qtd_x', 'Lugares na Horizontal:*') !!}
 			{!! Form::number('qtd_x', Input::old('qtd_x'), ['class'=>'form-control']) !!}
 			</div>
 
 			<div class="form-group">
-			{!! Form::label('qtd_y', 'Lugares na Vertical:') !!}
+			{!! Form::label('qtd_y', 'Lugares na Vertical:*') !!}
 			{!! Form::number('qtd_y', Input::old('qtd_y'), ['class'=>'form-control']) !!}
 			</div>
 

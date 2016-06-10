@@ -27,7 +27,7 @@
             {!! Form::modalSeek((isset($object) ?$object->id :null ), 'o_id', 'o_name', ($type == "user" ? "User" : "Role"), 'name' , 'loadPermissions();', []) !!}
         </div>
 
-        <table class="table table-striped  table-hover">
+        <table class="table table-striped table-hover dt-responsive nowrap" width="100%">
             <thead>
             <tr>
                 <th>Tabela</th>
@@ -66,6 +66,9 @@
         </div>
 
     </div>
+@endsection
+
+@section('scripts')
     <script>
         $( "#o_id" ).change(function() {
             var id = $( "#o_id" ).val();

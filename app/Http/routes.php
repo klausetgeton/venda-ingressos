@@ -73,20 +73,23 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::get('events/finish/{id}',['as'=>'events.finish', 'middleware' => 'role:admin', 'uses'=>'EventsController@finish']);
 
 		//sponsors		
-		Route::get('sponsors', ['as'=>'sponsors.index',	'middleware' => 'role:admin',	'uses'=>'SponsorsController@index']);		
+		Route::get('sponsors', ['as'=>'sponsors.index',	'middleware' => 'role:admin',	'uses'=>'SponsorsController@index']);
+		Route::get('sponsors/create', ['as'=>'sponsors.create',	'middleware' => 'role:admin',	'uses'=>'SponsorsController@create']);
 		Route::post('sponsors/store', ['as'=>'sponsors.store',	'middleware' => 'role:admin',	'uses'=>'SponsorsController@store']);	
 		Route::post('sponsors/edit/{id}', ['as'=>'sponsors.edit', 'middleware' => 'role:admin','uses'=>'SponsorsController@edit']);		
 		Route::post('sponsors/delete/{id}',['as'=>'sponsors.delete', 'middleware' => 'role:admin', 'uses'=>'SponsorsController@delete']);	
 
 		//discounts
-		Route::get('discounts', ['as'=>'discounts.index',	'middleware' => 'role:admin',	'uses'=>'DiscountsController@index']);		
+		Route::get('discounts', ['as'=>'discounts.index',	'middleware' => 'role:admin',	'uses'=>'DiscountsController@index']);
+		Route::get('discounts/create', ['as'=>'discounts.create',	'middleware' => 'role:admin',	'uses'=>'DiscountsController@create']);		
 		Route::post('discounts/store', ['as'=>'discounts.store',	'middleware' => 'role:admin',	'uses'=>'DiscountsController@store']);	
 		Route::post('discounts/edit/{id}', ['as'=>'discounts.edit', 'middleware' => 'role:admin','uses'=>'DiscountsController@edit']);
 		Route::put('discounts/update/{id}',['as'=>'discounts.update', 'middleware' => 'role:admin', 'uses'=>'DiscountsController@update']);
 		Route::post('discounts/delete/{id}',['as'=>'discounts.delete', 'middleware' => 'role:admin', 'uses'=>'DiscountsController@delete']);
 
 		//lots
-		Route::get('lots', ['as'=>'lots.index',	'middleware' => 'role:admin',	'uses'=>'LotsController@index']);	
+		Route::get('lots', ['as'=>'lots.index',	'middleware' => 'role:admin',	'uses'=>'LotsController@index']);
+		Route::get('lots/create', ['as'=>'lots.create',	'middleware' => 'role:admin',	'uses'=>'LotsController@create']);
 		Route::post('lots/store', ['as'=>'lots.store',	'middleware' => 'role:admin',	'uses'=>'LotsController@store']);
 		Route::post('lots/edit/{id}', ['as'=>'lots.edit', 'middleware' => 'role:admin','uses'=>'LotsController@edit']);		
 		Route::post('lots/delete/{id}',['as'=>'lots.delete', 'middleware' => 'role:admin', 'uses'=>'LotsController@delete']);				
@@ -109,6 +112,3 @@ Route::get('/seek/{model?}/{search_column?}/{id?}', [
 ]);
 
 Route::get('select2.data/{model}/{column}', ['as'=>'select2.data', 'middleware' => 'role:admin','uses'=>'Select2Controller@getData']);
-
-
-Route::get('teste', ['as'=>'teste',	'middleware' => 'role:admin',	'uses'=>'UsersController@teste']);

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
 
@@ -18,7 +18,7 @@ class EventsController extends Controller
 	}
 
 	public function finish($id)
-	{	
+	{
 		if(session()->has('event_multiple'))
 		{
 			Evento::find($id)->update(['completo' => 'true']);
@@ -27,15 +27,15 @@ class EventsController extends Controller
 			session()->forget('event_id');
 			session()->flash('message', 'ok');
 
-			return view('events.index');	
+			return view('events.index');
 		}else
-		{			
-			return view('events.index');						
+		{
+			return view('events.index');
 		}
 	}
 
 	public function create()
-	{		
+	{
 		return view('events.create');
 	}
 
@@ -48,7 +48,7 @@ class EventsController extends Controller
 		session()->put('event_multiple', 'true');
 		session()->put('event_id', $event->id);
 
-		return redirect()->route('sponsors.index');
+		return redirect()->route('sponsors.create');
 
 		//return redirect()->route('events.index');
 	}
@@ -61,7 +61,7 @@ class EventsController extends Controller
 		session()->put('event_multiple', 'true');
 		session()->put('event_id', $request->id);
 
-		return redirect()->route('sponsors.index');
+		return redirect()->route('sponsors.create');
 
 		//return redirect()->route('events.index');
 	}
@@ -74,7 +74,7 @@ class EventsController extends Controller
 	}
 
 	public function delete($id)
-	{		
+	{
 		Evento::find($id)->delete();
 		session()->flash('message', 'ok');
 		return redirect()->route('events.index');

@@ -25,8 +25,8 @@ class PlacesRequest extends Request
     {
         return [
             'nome' => ['required', 'max:150', 'unique:locais' . ($this->id ? ',nome,'. $this->id : '')],                 
-            'qtd_x' => ['integer'],
-            'qtd_y' => ['integer'],
+            'qtd_x' => ['required', 'integer'],
+            'qtd_y' => ['required', 'integer'],
         ];
     }
 }

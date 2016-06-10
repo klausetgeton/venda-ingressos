@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Model\AuditedObject;
 
 class Desconto extends AuditedObject
-{   
+{
 
     /**
      * The database table used by the model.
@@ -28,7 +28,7 @@ class Desconto extends AuditedObject
     public function evento()
     {
         return $this->belongsTo('App\Model\Evento', 'eventos_id');
-    }   
+    }
 
    /**
     * Get the ingressos_vendidos for the desconto
