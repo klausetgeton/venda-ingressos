@@ -157,5 +157,7 @@
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 
     @yield('scripts')
+
+    @yield('component-scripts')
 </body>
 </html>

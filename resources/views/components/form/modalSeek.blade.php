@@ -1,4 +1,4 @@
-<div class="form-inline">	
+<div class="form-inline">
 	{!! Form::number($form_id_field, $value, ['class'=>'form-control', 'style'=>'width:10%;']) !!}
 	{!! Form::label($form_description_field, ' ') !!}
 	{!! Form::text($form_description_field, null, ['class'=>'form-control', 'style'=>'width:80%;', 'disabled']) !!}
@@ -37,8 +37,8 @@
 	</div>
 </div>
 
-@section('scripts')
-	<script>		
+@section('component-scripts')
+	<script>
 		$( document ).ready(function() {
 			$('#resultsTable').DataTable({
 				processing: true,
@@ -62,10 +62,10 @@
 			//change value
 			$( "#{!! $form_id_field !!}" ).val(id);
 			$( "#{!! $form_description_field !!}" ).val(text);
-			
+
 			//hide modal window
 			$( "#searchModal" ).modal("hide");
-			
+
 			//aditional calls
 			{{$adc_call}}
 		}

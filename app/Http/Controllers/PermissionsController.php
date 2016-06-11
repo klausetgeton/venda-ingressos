@@ -11,7 +11,7 @@ use Bican\Roles\Models\Permission;
 
 class PermissionsController extends Controller
 {
-    public function index($type = null)
+    public function index($type)
     {
         return  $this->create($type);
     }
@@ -23,33 +23,7 @@ class PermissionsController extends Controller
         return view('permissions.create', compact('permissions', 'type'));
     }
 
-    public function store(PermissionsRequest $request, $type)
-    {
-        if($type == "user")
-        {
-            $object = User::find($request->o_id);
-        }
-        elseif ($type == "role")
-        {
-            $object = Role::find($request->o_id);    
-        }
-        
-        $object->detachAllPermissions();
-
-        if(isset($request->permissions))
-        {
-            foreach ($request->permissions as $permission)
-            {
-                $object->perm()->attach($permission);
-            }
-        }
-
-        $permissions = Permission::all();
-        session()->flash('message', 'ok');
-        return view('permissions.create', compact('permissions', 'type', 'object'));
-    }
-
-    public function edit($type, $id)
+    public function getTable($type, $id)
     {
         $permissions = Permission::all();
 
@@ -64,11 +38,36 @@ class PermissionsController extends Controller
 
         if(isset($object->id))
         {
-            return view('permissions.create', compact('permissions', 'type', 'object'));
+            return view('permissions._table', compact('permissions', 'type', 'object'));
         }
         else
         {
-            return view('permissions.create', compact('permissions', 'type'));
+            return view('permissions._table', compact('permissions', 'type'));
         }
+    }
+
+    public function store(PermissionsRequest $request, $type)
+    {
+        if($type == "user")
+        {
+            $object = User::find($request->o_id);
+        }
+        elseif ($type == "role")
+        {
+            $object = Role::find($request->o_id);
+        }
+
+        $object->detachAllPermissions();
+
+        if(isset($request->permissions))
+        {
+            foreach ($request->permissions as $permission)
+            {
+                $object->perm()->attach($permission);
+            }
+        }
+
+        session()->flash('message', 'ok');
+        return view('permissions.create', compact('type', 'object'));
     }
 }

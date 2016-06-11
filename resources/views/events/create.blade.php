@@ -64,7 +64,8 @@
 		</div>
 		{!! Form::close() !!}
 	</div>
-
+@endsection
+@section('scripts')
 	<script src="/js/jquery.maskedinput.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		jQuery(function($){
@@ -72,4 +73,4 @@
 		});
 	</script>
 
-@endsection
+@show

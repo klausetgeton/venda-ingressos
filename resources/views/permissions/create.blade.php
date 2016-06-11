@@ -2,6 +2,8 @@
 
 @section('content')
 
+    <meta name="_token" content="{{ csrf_token() }}" />
+
     <div class="container">
         <h1>Permissões do {{$type == "user" ? "Usuário" : "Grupo"}}</h1>
 
@@ -27,42 +29,7 @@
             {!! Form::modalSeek((isset($object) ?$object->id :null ), 'o_id', 'o_name', ($type == "user" ? "User" : "Role"), 'name' , 'loadPermissions();', []) !!}
         </div>
 
-        <table class="table table-striped table-hover dt-responsive nowrap" width="100%">
-            <thead>
-            <tr>
-                <th>Tabela</th>
-                <th>Listar</th>
-                <th>Criar</th>
-                <th>Editar</th>
-                <th>Apagar</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            <?php $models = array("User", "Permission", "Role") ?>
-
-            @foreach ($models as $model)
-                <tr>
-                    <td>
-                        {{$model}}
-                    </td>
-                    @foreach($permissions as $permission)
-                        @if ($permission->model == $model )
-                            <td>
-                                {{ Form::checkbox('permissions[]',$permission->id, ( isset($object) ? $object->hasThisP($permission->id) : null), null) }}
-                                {{ $permission->name }}
-                            </td>
-                        @endif
-                    @endforeach
-                </tr>
-            @endforeach
-
-            </tbody>
-        </table>
-
-        <div class="form-group">
-            {!! Form::submit('Salvar', ['class'=>'btn btn-primary']) !!}
-            {!! Form::close() !!}
+        <div id="tableDiv" name="tableDiv">
         </div>
 
     </div>
@@ -76,26 +43,43 @@
 
             if(id > 0 && name != '')
             {
-                loadPermissions(id);
+                loadPermissions();
             }
         });
 
-
-        function loadPermissions (id)
-        {            
+        function loadPermissions ()
+        {
             var id = $( "#o_id" ).val();
             var name_length = $("#o_name").val().trim().length;
-            
+
             if(id > 0 && name_length > 0 )
             {
-                id = $( "#o_id" ).val();
-                window.location.replace("{{route('permissions.edit')}}/{{$type}}/" + id);
+                $.ajaxSetup({
+                   header:$('meta[name="_token"]').attr('content')
+                })
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{{route('permissions.table')}}/{{$type}}/' + id,
+                    data: { _token : $('meta[name="_token"]').attr('content') },
+                    success: function(data)
+                    {
+                        $('#tableDiv').empty();
+                        $('#tableDiv').append(data);
+                    },
+                    error:function(data){
+                        var errors = data.responseJSON;
+                        $('#tableDiv').empty();
+                        $('#tableDiv').html(data);
+                    }
+                })
             }
         }
 
-        $( document ).ready(function() 
+        $( document ).ready(function()
         {
             $( "#o_name" ).val("{{ isset($object) ? $object->name : null }}");
+            loadPermissions();
         });
     </script>
 @endsection
