@@ -13,9 +13,10 @@
 					<th>Nome</th>
 					<th>Início das vendas</th>
 					<th>Fim das vendas</th>
-					<th>Quantidade</th>
 					<th>Valor do ingresso masculino</th>
 					<th>Valor do ingresso feminino</th>
+					<th>Quantidade</th>
+					<th>Vendidos</th>
 					<th>ID do Evento</th>
 					<th>Evento</th>
 				</tr>
@@ -26,9 +27,10 @@
 					<th>Nome</th>
 					<th>Início das vendas</th>
 					<th>Fim das vendas</th>
-					<th>Quantidade</th>
 					<th>Valor do ingresso masculino</th>
 					<th>Valor do ingresso feminino</th>
+					<th>Quantidade</th>
+					<th>Vendidos</th>
 					<th>ID do Evento</th>
 					<th>Evento</th>
 				</tr>
@@ -55,9 +57,10 @@
 					{ data: 'nome', name: 'nome' },
 					{ data: 'dt_inicio', name: 'dt_inicio' },
 					{ data: 'dt_fim', name: 'dt_fim' },
-					{ data: 'quantidade', name: 'quantidade' },
 					{ data: 'valor_masculino', name: 'valor_masculino' },
 					{ data: 'valor_feminino', name: 'valor_feminino' },
+					{ data: 'quantidade', name: 'quantidade' },
+					{ data: 'vendidos', name: 'vendidos' },
 					{ data: 'eventos_id', name: 'eventos_id' },
 					{ data: 'evento.nome', name: 'evento.nome' },
 				],

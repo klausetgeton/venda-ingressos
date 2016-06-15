@@ -24,9 +24,11 @@ class PlacesRequest extends Request
     public function rules()
     {
         return [
-            'nome' => ['required', 'max:150', 'unique:locais' . ($this->id ? ',nome,'. $this->id : '')],                 
+            'nome' => ['required', 'max:150', 'unique:locais' . ($this->id ? ',nome,'. $this->id : '')],
             'qtd_x' => ['required', 'integer'],
             'qtd_y' => ['required', 'integer'],
+            'cidade' => ['required'],
+            'endereco' => ['required']
         ];
     }
 }

@@ -71,7 +71,7 @@
 			</thead>
 		</table>
 
-		<a class="btn btn-primary" href="{{ route('discounts.create') }}">
+		<a class="btn btn-primary" href="{{ route('lots.create') }}">
 			<i class="fa fa-arrow-left" aria-hidden="true"></i>
 			Etapa Anterior
 		</a>

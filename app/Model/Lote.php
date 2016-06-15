@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Model\IngressoVendido;
 
 class Lote extends AuditedObject
 {
@@ -21,7 +22,7 @@ class Lote extends AuditedObject
      */
     protected $fillable = ['descricao', 'dt_inicio', 'nome', 'dt_fim', 'quantidade', 'eventos_id', 'valor_masculino', 'valor_feminino'];
 
-        
+
     /**
     * Get the descontos for the lote.
     */
@@ -36,5 +37,10 @@ class Lote extends AuditedObject
     public function evento()
     {
         return $this->belongsTo('App\Model\Evento', 'eventos_id');
+    }
+
+    public function ingressosVendidosCount()
+    {
+        return IngressoVendido::where('lotes_id', $this->id)->count();
     }
 }

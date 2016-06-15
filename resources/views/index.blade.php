@@ -67,7 +67,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
+                    WebBuyers
                 </a>
             </div>
 

@@ -5,7 +5,7 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 
 class Evento extends AuditedObject
-{    
+{
 
     /**
      * The database table used by the model.
@@ -26,15 +26,15 @@ class Evento extends AuditedObject
     */
     public function lotes()
     {
-        return $this->hasMany('App\Model\Lote');
-    }   
+        return $this->hasMany('App\Model\Lote', 'eventos_id');
+    }
 
     /**
     * Get the patrocinadores for the evento
     */
     public function patrocinadores()
     {
-        return $this->hasMany('App\Model\Patrocinador');
+        return $this->hasMany('App\Model\Patrocinador', 'eventos_id');
     }
 
     /**
@@ -42,11 +42,11 @@ class Evento extends AuditedObject
     */
     public function descontos()
     {
-        return $this->hasMany('App\Model\Desconto');
+        return $this->hasMany('App\Model\Desconto', 'eventos_id');
     }
 
    /**
-    * Get the local associated with the evento.
+    * Get the local associated with the evento. 
     */
     public function local()
     {
@@ -56,7 +56,18 @@ class Evento extends AuditedObject
     * Get the administradores for the evento
     */
     public function administradores()
-    {    
+    {
         return $this->belongsToMany('App\Model\User', 'administradores_evento');
+    }
+
+    public function delete()
+    {
+        // delete all related objects
+        $this->descontos()->delete();
+        $this->patrocinadores()->delete();
+        $this->lotes()->delete();
+
+        // delete the user
+        return parent::delete();
     }
 }

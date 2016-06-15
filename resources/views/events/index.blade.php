@@ -24,6 +24,9 @@
 					<th>Nome</th>
 					<th>Data</th>
 					<th>Hora</th>
+					<th>ID do Local</th>
+					<th>Local</th>
+					<th>Capacidade</th>
 					<th>Ação</th>
 				</tr>
 			</thead>
@@ -33,6 +36,9 @@
 					<th>Nome</th>
 					<th>Data</th>
 					<th>Hora</th>
+					<th>ID do Local</th>
+					<th>Local</th>
+					<th>Capacidade</th>
 					<th>Ação</th>
 				</tr>
 			</tfoot>
@@ -62,10 +68,7 @@
 			{
 				window.location.assign(link);
 			}
-			else
-			{
-
-			}
+			else{}
 		});
 	}
 
@@ -84,6 +87,9 @@
 			{ data: 'nome', name: 'nome' },
 			{ data: 'data', name: 'data' },
 			{ data: 'hora', name: 'hora' },
+			{ data: 'local.id', name: 'local.id' },
+			{ data: 'local.nome', name: 'local.nome' },
+			{ data: 'local.capacidade', name: 'local.capacidade' },
 			{ data: null, render: function ( data, type, row ) {
 				return "<a href=\"/admin/events/edit/" + data.id +  "\"class=\"btn-sm btn-success\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i> Editar</a>" +
 				"<a href=\"javascript:showConfirmDeleteDialog(\'/admin/events/delete/" + data.id + "\')\" class=\"btn-sm btn-danger\"><i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i> Apagar</a>";

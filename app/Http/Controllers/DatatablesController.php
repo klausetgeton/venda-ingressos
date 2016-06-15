@@ -21,7 +21,7 @@ class DatatablesController extends Controller
     	$fullModalClass['Role'] = ['Bican\Roles\Models\Role', ['id', 'name']];
         $fullModalClass['Log']  = ['OwenIt\Auditing\Log', ['user_id', 'type','owner_id', 'old_value','new_value','owner_type','created_at']];
         $fullModalClass['Evento'] = ['App\Model\Evento', ['id', 'nome', 'data', 'hora']];
-        $fullModalClass['Local'] = ['App\Model\Local', ['id', 'nome', 'descricao']];
+        $fullModalClass['Local'] = ['App\Model\Local', ['id', 'nome', 'descricao', 'capacidade', 'endereco', 'cidade']];
         $fullModalClass['Patrocinador'] = ['App\Model\Patrocinador', ['id', 'nome', 'descricao', 'eventos_id']];
         $fullModalClass['Desconto'] = ['App\Model\Desconto', ['id', 'descricao', 'hash', 'quantidade' ,'porcentagem','eventos_id']];
         $fullModalClass['Lote'] = ['App\Model\Lote', ['id', 'descricao', 'dt_inicio', 'nome', 'dt_fim', 'quantidade', 'eventos_id', 'valor_masculino', 'valor_feminino']];
@@ -29,7 +29,7 @@ class DatatablesController extends Controller
         switch ($model)
         {
             case 'Evento':
-                $result = $fullModalClass[$model][0]::select($fullModalClass[$model][1])->with('local')->get();
+                $result = $fullModalClass[$model][0]::with('local')->get();
                 return Datatables::of($result)
                                 ->editColumn('data', function ($obj)
                                     {
@@ -69,10 +69,10 @@ class DatatablesController extends Controller
             case 'Lote':
                 if($request->get('eventos_id'))
                 {
-                    $result = $fullModalClass[$model][0]::select($fullModalClass[$model][1])->where('eventos_id', (int) $request->get('eventos_id'))->with('evento')->get();
+                    $result = $fullModalClass[$model][0]::where('eventos_id', (int) $request->get('eventos_id'))->with('evento')->get();
                 }else
                 {
-                    $result = $fullModalClass[$model][0]::select($fullModalClass[$model][1])->with('evento')->get();
+                    $result = $fullModalClass[$model][0]::with('evento')->get();
                 }
 
                 return Datatables::of($result)
@@ -95,6 +95,10 @@ class DatatablesController extends Controller
                                 ->editColumn('dt_fim', function ($obj)
                                     {
                                         return date('d-m-Y', strtotime($obj->dt_fim));
+                                    })
+                                ->addColumn('vendidos', function ($obj)
+                                    {
+                                        return $obj->ingressosVendidosCount();
                                     })
                                 ->make(true);
                 break;

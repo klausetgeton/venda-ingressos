@@ -14,12 +14,11 @@
 			@endif
 
 			@if (isset($place))
-				{!! Form::model($place, ['route' => ['places.update', $place->id], 'method' => 'put']) !!}				
+				{!! Form::model($place, ['route' => ['places.update', $place->id], 'method' => 'put']) !!}
 			@else
 				{!! Form::open(array('action' => 'PlacesController@store')) !!}
 			@endif
 
-			<!-- Nome Form Input -->
 			<div class="form-group">
 			{!! Form::label('nome', 'Nome:*') !!}
 			{!! Form::text('nome', Input::old('nome'), ['class'=>'form-control']) !!}
@@ -35,12 +34,21 @@
 			{!! Form::number('qtd_y', Input::old('qtd_y'), ['class'=>'form-control']) !!}
 			</div>
 
-			<!-- Descricao Form Input -->
+			<div class="form-group">
+			{!! Form::label('cidade', 'Cidade:*') !!}
+			{!! Form::text('cidade', Input::old('cidade'), ['class'=>'form-control']) !!}
+			</div>
+
+			<div class="form-group">
+			{!! Form::label('endereco', 'Endereço:*') !!}
+			{!! Form::text('endereco', Input::old('endereco'), ['class'=>'form-control']) !!}
+			</div>
+
 			<div class="form-group">
 			{!! Form::label('descricao', 'Descrição:') !!}
 			{!! Form::textarea('descricao', Input::old('descricao'), ['class'=>'form-control']) !!}
 			</div>
-		
+
 			<div class="form-group">
 			{!! Form::submit('Salvar', ['class'=>'btn btn-primary']) !!}
 			</div>
