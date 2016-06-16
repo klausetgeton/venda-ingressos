@@ -71,6 +71,7 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::put('events/update/{id}',['as'=>'events.update', 'middleware' => 'role:admin', 'uses'=>'EventsController@update']);
 		Route::get('events/delete/{id}',['as'=>'events.delete', 'middleware' => 'role:admin', 'uses'=>'EventsController@delete']);
 		Route::get('events/finish/{id}',['as'=>'events.finish', 'middleware' => 'role:admin', 'uses'=>'EventsController@finish']);
+		Route::get('events/json/', ['as' => 'events.json', 'uses' => 'EventsController@getJsonList']);
 
 		//sponsors
 		Route::get('sponsors', ['as'=>'sponsors.index',	'middleware' => 'role:admin',	'uses'=>'SponsorsController@index']);
@@ -93,6 +94,14 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::post('lots/store', ['as'=>'lots.store',	'middleware' => 'role:admin',	'uses'=>'LotsController@store']);
 		Route::post('lots/edit/{id}', ['as'=>'lots.edit', 'middleware' => 'role:admin','uses'=>'LotsController@edit']);
 		Route::post('lots/delete/{id}',['as'=>'lots.delete', 'middleware' => 'role:admin', 'uses'=>'LotsController@delete']);
+		Route::get('lots/json/{events_id}', ['as' => 'lots.json', 'uses' => 'LotsController@getJsonListByEvent']);
+
+		//PurchasePossibility
+		Route::get('pp/json/{events_id}', ['as' => 'pp.json', 'uses' => 'PurchasePossibilityController@getJsonListByEvent']);
+
+		//SoldTicket
+		Route::post('tickets/store', ['as' => 'tickets.store', 'uses' => 'SoldTicketController@store']);
+
     });
 });
 

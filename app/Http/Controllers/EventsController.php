@@ -79,4 +79,11 @@ class EventsController extends Controller
 		session()->flash('message', 'ok');
 		return redirect()->route('events.index');
 	}
+
+	public function getJsonList()
+	{
+		$events = Evento::all();
+
+		return response()->json($events);
+	}
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PossibilidadeCompra extends Model
 {
-	
+
 
     /**
      * The database table used by the model.
@@ -26,7 +26,7 @@ class PossibilidadeCompra extends Model
     * Get the eventos for the PossibilidadeCompra
     */
     public function locais()
-    {    
+    {
         return $this->belongsToMany('App\Model\Local');
     }
 }

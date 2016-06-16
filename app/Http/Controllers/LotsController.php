@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Model\Lote;
+use App\Model\Evento;
 use App\Http\Requests\LotsRequest;
 
 class LotsController extends Controller
@@ -77,5 +78,13 @@ class LotsController extends Controller
 		{
 			return redirect()->route('lots.index');
 		}
+	}
+
+	public function getJsonListByEvent($events_id)
+	{
+		$event = Evento::find($events_id);
+		$lots = $event->lotes;
+
+		return response()->json($lots);
 	}
 }
