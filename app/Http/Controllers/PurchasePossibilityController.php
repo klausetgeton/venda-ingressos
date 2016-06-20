@@ -59,6 +59,6 @@ class PurchasePossibilityController extends Controller
 
 		$event = Evento::find($events_id);
 
-		return response()->json($event->possibildadesCompra());
+		return response()->json($event->possibilidadesCompra());
 	}
 }

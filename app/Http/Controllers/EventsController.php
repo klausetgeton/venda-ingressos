@@ -82,7 +82,8 @@ class EventsController extends Controller
 
 	public function getJsonList()
 	{
-		$events = Evento::all();
+		//we should filter between dates in the next version
+		$events = Evento::where('completo', true)->with('local')->get();
 
 		return response()->json($events);
 	}

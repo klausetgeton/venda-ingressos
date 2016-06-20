@@ -72,7 +72,25 @@ class Evento extends AuditedObject
         return parent::delete();
     }
 
-    public function possibildadesCompra()
+    /**
+    * Get the lotes for the evento
+    */
+    public function availableLotes()
+    {
+        $today = date("H:i:s");
+
+        //havent been totaly sold
+        $lotes = $this->lotes()->where('quantidade', '>', 0);
+
+        if(isset($lotes))
+        {
+            $lotes = $lotes->where('data_inicio', '>=', $today);
+        }else
+        {
+        }
+    }
+
+    public function possibilidadesCompra()
     {
         try
         {
@@ -101,7 +119,13 @@ class Evento extends AuditedObject
             //merge the sold places and the available places
             $merged = $pc_disponiveis->merge($pc_vendidas, $pc_disponiveis);
 
-            return $merged;
+            $event = array();
+            $event[0] = $this->toArray();
+            $event[0]['lotes'] = $this->lotes;
+            $event[0]['local']['possibilidades_compra'] = '';
+            $event[0]['lugares'] = $merged;
+
+            return $event;
 
         } catch (Exception $e)
         {
@@ -109,3 +133,5 @@ class Evento extends AuditedObject
         }
     }
 }
+
+
