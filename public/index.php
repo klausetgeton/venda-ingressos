@@ -1,4 +1,14 @@
 <?php
+// Evitar o pau do xdebug do caralho
+// Maximum function nesting level of '100' reached, aborting!
+ini_set('xdebug.max_nesting_level', 5000);
+
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+// header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Request-With, X-Requested-With');
+header('Access-Control-Allow-Credentials: true');
+
 /**
  * Laravel - A PHP Framework For Web Artisans
  *

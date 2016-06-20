@@ -32,5 +32,8 @@ class Kernel extends HttpKernel
         'role' => \Bican\Roles\Middleware\VerifyRole::class,
         'permission' => \Bican\Roles\Middleware\VerifyPermission::class,
         'level' => \Bican\Roles\Middleware\VerifyLevel::class,
+
+        'jwt.auth' => \Tymon\JWTAuth\Middleware\GetUserFromToken::class,
+        'jwt.refresh' => \Tymon\JWTAuth\Middleware\RefreshToken::class
     ];
 }

@@ -121,3 +121,22 @@ Route::get('/seek/{model?}/{search_column?}/{id?}', [
 ]);
 
 Route::get('select2.data/{model}/{column}', ['as'=>'select2.data', 'middleware' => 'role:admin','uses'=>'Select2Controller@getData']);
+
+
+// API
+
+Route::get('/bbb', function(){
+    return "asdasd";
+});
+
+$api = app('Dingo\Api\Routing\Router');
+$api->version('v1', function($api) {
+  // $api->get('hello', "App\Http\Controllers\APIController@index");
+  $api->post('authenticate', 'App\Http\Controllers\APIController@authenticate');
+  $api->post('register', 'App\Http\Controllers\APIController@register');
+});
+
+$api->version('v1', ['middleware' => 'api.auth'], function($api) {
+  $api->get('hello', "App\Http\Controllers\APIController@index");
+  $api->get('user', 'App\Http\Controllers\APIController@pegausuario');
+});
