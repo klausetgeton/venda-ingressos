@@ -119,7 +119,7 @@ return [
         Illuminate\Bus\BusServiceProvider::class,
         Illuminate\Cache\CacheServiceProvider::class,
         Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
-        
+
         Illuminate\Cookie\CookieServiceProvider::class,
         Illuminate\Database\DatabaseServiceProvider::class,
         Illuminate\Encryption\EncryptionServiceProvider::class,
@@ -152,7 +152,7 @@ return [
 
         //laravelcollective
         Collective\Html\HtmlServiceProvider::class,
-        
+
         //OwenIt Auditing
         OwenIt\Auditing\AuditingServiceProvider::class,
 
@@ -160,9 +160,13 @@ return [
         App\Providers\FormServiceProvider::class,
 
         //cpf validator
-        ValidadorCpf\CpfServiceProvider::class
+        ValidadorCpf\CpfServiceProvider::class,
 
+        // API
+        Dingo\Api\Provider\LaravelServiceProvider::class,
 
+        // JWT
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
 
     ],
 
@@ -217,6 +221,9 @@ return [
 
         'Html'      => 'Collective\Html\HtmlFacade',
         'Form'      => 'Collective\Html\FormFacade',
+
+        'JWTAuth'    => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory' => Tymon\JWTAuth\Facedes\JWTFactory::class,
 
     ],
 

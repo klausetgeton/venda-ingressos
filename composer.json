@@ -7,11 +7,13 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
+        "dingo/api": "1.0.*@dev",
         "bican/roles": "2.1.*",
         "laravelcollective/html": "5.2.*",
         "owen-it/laravel-auditing": "^2.2",
         "yajra/laravel-datatables-oracle": "^6.11",
-        "jailtonsc/validador-cpf-laravel": "^2.0"
+        "jailtonsc/validador-cpf-laravel": "^2.0",
+        "tymon/jwt-auth": "^0.5.9"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

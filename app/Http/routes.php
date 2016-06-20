@@ -37,7 +37,7 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::post('roles/store', ['as'=>'roles.store','middleware' => 'role:admin','uses'=>'RolesController@store']);
 		Route::get('roles/edit/{id}', ['as'=>'roles.edit','middleware' => 'role:admin','uses'=>'RolesController@edit']);
 		Route::put('roles/update/{id}',['as'=>'roles.update','middleware' => 'role:admin', 'uses'=>'RolesController@update']);
-		Route::get('roles/delete/{id}',['as'=>'roles.delete', 'middleware' => 'role:admin', 'uses'=>'RolesController@delete']);	
+		Route::get('roles/delete/{id}',['as'=>'roles.delete', 'middleware' => 'role:admin', 'uses'=>'RolesController@delete']);
 
 
 		Route::get('users', ['as'=>'users.index',	'middleware' => 'role:admin',	'uses'=>'UsersController@index']);
@@ -45,13 +45,13 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::post('users/store', ['as'=>'users.store', 'middleware' => 'role:admin','uses'=>'UsersController@store']);
 		Route::get('users/edit/{id}', ['as'=>'users.edit', 'middleware' => 'role:admin','uses'=>'UsersController@edit']);
 		Route::put('users/update/{id}',['as'=>'users.update', 'middleware' => 'role:admin', 'uses'=>'UsersController@update']);
-		Route::get('users/delete/{id}',['as'=>'users.delete', 'middleware' => 'role:admin', 'uses'=>'UsersController@delete']);	
+		Route::get('users/delete/{id}',['as'=>'users.delete', 'middleware' => 'role:admin', 'uses'=>'UsersController@delete']);
 
 		Route::get('permissions/{type?}', ['as'=>'permissions.index',	'middleware' => 'role:admin',	'uses'=>'PermissionsController@index']);
 		Route::get('permissions/create/{type?}', ['as'=>'permissions.create', 'middleware' => 'role:admin', 'uses'=>'PermissionsController@create']);
 		Route::post('permissions/store/{type?}', ['as'=>'permissions.store',	'middleware' => 'role:admin',	'uses'=>'PermissionsController@store']);
 		Route::get('permissions/edit/{type?}/{id?}', ['as'=>'permissions.edit', 'middleware' => 'role:admin','uses'=>'PermissionsController@edit']);
-		
+
     });
 });
 
@@ -61,7 +61,7 @@ Route::get('/permission.denied', function () {
 });
 
 Route::get('/datatables.data/{model}', [
-    'as' => 'datatables.data', 
+    'as' => 'datatables.data',
     'uses' => 'DatatablesController@anyData'
 ]);
 
@@ -74,3 +74,23 @@ Route::get('select2.data/{model}/{column}', ['as'=>'select2.data', 'middleware' 
 
 
 Route::get('teste', ['as'=>'teste',	'middleware' => 'role:admin',	'uses'=>'UsersController@teste']);
+
+
+
+// API
+
+Route::get('/bbb', function(){
+    return "asdasd";
+});
+
+$api = app('Dingo\Api\Routing\Router');
+$api->version('v1', function($api) {
+  // $api->get('hello', "App\Http\Controllers\APIController@index");
+  $api->post('authenticate', 'App\Http\Controllers\APIController@authenticate');
+  $api->post('register', 'App\Http\Controllers\APIController@register');
+});
+
+$api->version('v1', ['middleware' => 'api.auth'], function($api) {
+  $api->get('hello', "App\Http\Controllers\APIController@index");
+  $api->get('user', 'App\Http\Controllers\APIController@pegausuario');
+});
