@@ -3,9 +3,8 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
-use OwenIt\Auditing\AuditingTrait;
 
-class AdministradoresEvento extends Model
+class AdministradoresEvento extends AuditedObject
 {
     
     use AuditingTrait;

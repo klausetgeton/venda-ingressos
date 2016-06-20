@@ -2,96 +2,107 @@
 
 @section('content')
 
-<div class="container">
-	@if (session('message') == 'ok')		
-		<div class="alert alert-success">
-			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  			Operação realizada com sucesso.
-		</div>
-	@endif			
+	<div class="container">
+		@if (session('message') == 'ok')		
+			<div class="alert alert-success">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	  			Operação realizada com sucesso.
+			</div>
+		@endif			
 
-	<h1>Usuários</h1>		
-	<a href="{{ route('users.create') }}" class="btn btn-default">Novo Usuário</a>
-	<br />
-	<br />
+		<h1>Usuários</h1>		
+		<a href="{{ route('users.create') }}" class="btn btn-default">Novo Usuário</a>
+		<br />
+		<br />
 
-	<table id="dList" class="table table-striped table-bordered table-hover">
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Nome</th>
-				<th>Email</th>
-				<th>Ação</th>
-			</tr>
-		</thead>	
-	</table>
-</div>
+		<table id="dList" class="table table-striped table-hover dt-responsive nowrap" width="100%">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nome</th>
+					<th>Email</th>
+					<th>Ação</th>
+				</tr>
+			</thead>	
+			<tfoot>
+				<tr>
+					<th>ID</th>
+					<th>Nome</th>
+					<th>Email</th>
+					<th>Ação</th>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+@endsection
 
+@section('scripts')
+	<script>
+		function showConfirmDeleteDialog(link) {
+			swal({   
+				title: "Deseja apagar o registro?",   
+				text: "A ação não poderá ser desfeita",   
+				type: "warning",   
+				showCancelButton: true,   
+				confirmButtonColor: "#DD6B55",   
+				confirmButtonText: "Apagar",   
+				cancelButtonText: "Cancelar",   
+				closeOnConfirm: false,   
+				closeOnCancel: true
 
-<script>
-	function showConfirmDeleteDialog(link) {
-		swal({   
-			title: "Deseja apagar o registro?",   
-			text: "A ação não poderá ser desfeita",   
-			type: "warning",   
-			showCancelButton: true,   
-			confirmButtonColor: "#DD6B55",   
-			confirmButtonText: "Apagar",   
-			cancelButtonText: "Cancelar",   
-			closeOnConfirm: false,   
-			closeOnCancel: true
+			}, 
 
-		}, 
+			function(isConfirm)
+			{   
+				if (isConfirm) 
+				{     
+					window.location.assign(link);
+				} 			
+				else
+				{
 
-		function(isConfirm)
-		{   
-			if (isConfirm) 
-			{     
-				window.location.assign(link);
-			} 			
-			else
-			{
-
-			}
-		});  		
-	}
-
-	$(function() {
-		try{
-			loadTable();			
-		}catch(err){	    		
-			$.getScript('/js/jquery.dataTables.min.js', function() {
-				$.getScript('/js/dataTables.bootstrap.min.js', function() {
-					loadTable();
-				});
-			});
+				}
+			});  		
 		}
-	});
 
-	<?php $model = "User";	 ?>
-	function loadTable(){			
-		$('#dList').DataTable({
-			processing: true,
-			serverSide: true,
-			ajax: '{!! route('datatables.data', ['model' => $model]) !!}',
-			columns: [
-			{ data: 'id', name: 'id' },
-			{ data: 'name', name: 'name' },
-			{ data: 'email', name: 'email' },
-			{ data: null, render: function ( data, type, row ) {    
+		<?php $model = "User";	 ?>
+		$( document ).ready(function() {			
+			$('#dList').DataTable({
+				processing: true,
+				serverSide: true,
+				dom: 'lBfrtip',
+		        buttons: [
+		            'copy', 'csv', 'excel', 'pdf', 'print'
+	        	],
+				ajax: '{!! route('datatables.data', ['model' => $model]) !!}',
+				columns: [
+				{ data: 'id', name: 'id' },
+				{ data: 'name', name: 'name' },
+				{ data: 'email', name: 'email' },
+				{ data: null, render: function ( data, type, row ) {    
 
-				return "<a href=\"/admin/users/edit/" + data.id +  "\"class=\"btn-sm btn-success\">Editar</a>" + 
-				"<a href=\"javascript:showConfirmDeleteDialog(\'/admin/users/delete/" + data.id + "\')\" class=\"btn-sm btn-danger\">Apagar</a>";
-			}, orderable: false, "bSearchable": false },			
-			],
-			"language": {
-				"url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese-Brasil.json"
-			},
-			"order": [[ 0, "desc" ]],
-		});	
-	}
-
-
-</script>
+					return "<a href=\"/admin/users/edit/" + data.id +  "\"class=\"btn-sm btn-success\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i> Editar</a>" + 
+					"<a href=\"javascript:showConfirmDeleteDialog(\'/admin/users/delete/" + data.id + "\')\" class=\"btn-sm btn-danger\"><i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i> Apagar</a>";
+				}, orderable: false, "bSearchable": false },			
+				],
+				"language": {
+					"url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese-Brasil.json"
+				},
+				"order": [[ 0, "desc" ]],
+				initComplete: function () {
+		            this.api().columns(['0', '1', '2']).every(function () {
+		                var column = this;
+		                var input = document.createElement("input");
+		                input.className = 'form-control input-sm';	                
+		                $(input).appendTo($(column.footer()).empty())
+		                .on('change', function () {
+		                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
+		                    column.search(val ? val : '', true, false).draw();
+		                });	                
+		            });
+		        },
+			});	
+		});
+	</script>
 
 @endsection

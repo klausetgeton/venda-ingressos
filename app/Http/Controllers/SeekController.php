@@ -25,6 +25,8 @@ class SeekController extends Controller
     {
         $fullModalClass['User'] = ['App\Model\User', ['id', 'name', 'email']];
         $fullModalClass['Role'] = ['Bican\Roles\Models\Role', ['id', 'name']];
+        $fullModalClass['Local'] = ['App\Model\Local', ['id', 'nome']];
+        $fullModalClass['Evento'] = ['App\Model\Evento', ['id', 'nome']];
 
         $querySelector = $fullModalClass[$model][0]::where('id', '=' ,"$id");
 

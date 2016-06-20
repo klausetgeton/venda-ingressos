@@ -3,11 +3,9 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
-use OwenIt\Auditing\AuditingTrait;
 
-class IngressoVendido extends Model
-{
-    use AuditingTrait;
+class IngressoVendido extends AuditedObject
+{   
 
     /**
      * The database table used by the model.
@@ -21,7 +19,7 @@ class IngressoVendido extends Model
      *
      * @var array
      */
-    protected $fillable = ['users_id', 'data_cancelamento', 'data_compra', 'descontos_id', 'possibilidades_evento_id'];
+    protected $fillable = ['users_id', 'data_cancelamento', 'data_compra', 'descontos_id', 'possibilidades_evento_id', 'lotes_id', 'data_pagamento'];
 
   /**
     * Get the desconto that owns the ingresso.
@@ -40,10 +38,17 @@ class IngressoVendido extends Model
     }
 
     /**
-    * Get the PossibilidadesEvento that owns the ingresso.
+    * Get the Lote that owns the ingresso.
     */
-    public function possibilidades_evento()
+    public function lote()
     {
-        return $this->belongsTo('App\Model\PossibilidadesEvento');
+        return $this->belongsTo('App\Model\Lote');
+    }
+
+    /**
+    */
+    public function possibilidade_compra()
+    {
+        return $this->belongsTo('App\Model\PossibilidadesCompra');
     }
 }

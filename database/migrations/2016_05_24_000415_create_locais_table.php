@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateModalidadesLoteTable extends Migration
+class CreateLocaisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,10 @@ class CreateModalidadesLoteTable extends Migration
      */
     public function up()
     {
-        Schema::create('modalidades_lote', function (Blueprint $table) {
+        Schema::create('locais', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('nome', 150);
             $table->string('descricao', 150)->nullable();
-            $table->double('valor', 5,2);
-            $table->integer('eventos_id')->unsigned()->index();
-            $table->foreign('eventos_id')->references('id')->on('eventos');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateModalidadesLoteTable extends Migration
      */
     public function down()
     {
-        Schema::drop('modalidades_lote');
+        Schema::drop('locais');
     }
 }

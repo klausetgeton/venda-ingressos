@@ -1,5 +1,4 @@
 <?php
-
 // Evitar o pau do xdebug do caralho
 // Maximum function nesting level of '100' reached, aborting!
 ini_set('xdebug.max_nesting_level', 5000);
@@ -16,7 +15,6 @@ header('Access-Control-Allow-Credentials: true');
  * @package  Laravel
  * @author   Taylor Otwell <taylorotwell@gmail.com>
  */
-
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader
@@ -28,9 +26,7 @@ header('Access-Control-Allow-Credentials: true');
 | loading any of our classes later on. It feels nice to relax.
 |
 */
-
 require __DIR__.'/../bootstrap/autoload.php';
-
 /*
 |--------------------------------------------------------------------------
 | Turn On The Lights
@@ -42,9 +38,7 @@ require __DIR__.'/../bootstrap/autoload.php';
 | the responses back to the browser and delight our users.
 |
 */
-
 $app = require_once __DIR__.'/../bootstrap/app.php';
-
 /*
 |--------------------------------------------------------------------------
 | Run The Application
@@ -56,13 +50,9 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 | and wonderful application we have prepared for them.
 |
 */
-
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
-
 $response = $kernel->handle(
     $request = Illuminate\Http\Request::capture()
 );
-
 $response->send();
-
 $kernel->terminate($request, $response);

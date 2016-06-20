@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
+use Illuminate\Http\Request;
 use Bican\Roles\Models\Role;
 use App\Model\User;
 use Yajra\Datatables\Datatables;
@@ -15,57 +15,99 @@ class DatatablesController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function anyData($model = null)
+    public function anyData(Request $request, $model = null)
     {
     	$fullModalClass['User'] = ['App\Model\User', ['id', 'name', 'email']];
     	$fullModalClass['Role'] = ['Bican\Roles\Models\Role', ['id', 'name']];
-        $fullModalClass['Log']  = ['OwenIt\Auditing\Log', ['user_id', 'owner_id', 'old_value','new_value','owner_type','created_at']];
+        $fullModalClass['Log']  = ['OwenIt\Auditing\Log', ['user_id', 'type','owner_id', 'old_value','new_value','owner_type','created_at']];
+        $fullModalClass['Evento'] = ['App\Model\Evento', ['id', 'nome', 'data', 'hora']];
+        $fullModalClass['Local'] = ['App\Model\Local', ['id', 'nome', 'descricao', 'capacidade', 'endereco', 'cidade']];
+        $fullModalClass['Patrocinador'] = ['App\Model\Patrocinador', ['id', 'nome', 'descricao', 'eventos_id']];
+        $fullModalClass['Desconto'] = ['App\Model\Desconto', ['id', 'descricao', 'hash', 'quantidade' ,'porcentagem','eventos_id']];
+        $fullModalClass['Lote'] = ['App\Model\Lote', ['id', 'descricao', 'dt_inicio', 'nome', 'dt_fim', 'quantidade', 'eventos_id', 'valor_masculino', 'valor_feminino']];
 
-    	$result = $fullModalClass[$model][0]::select($fullModalClass[$model][1])->get();        
-        
-        if($model == "Log")
+        switch ($model)
         {
-            return Datatables::of($result)
-            ->editColumn('old_value', function ($obj) 
-            {
-                $ret = "";
-                
-                if($obj->old_value)
+            case 'Evento':
+                $result = $fullModalClass[$model][0]::with('local')->get();
+                return Datatables::of($result)
+                                ->editColumn('data', function ($obj)
+                                    {
+                                        return date('d-m-Y', strtotime($obj->data));
+                                    })
+                                ->make(true);
+
+            case 'Patrocinador':
+                if($request->get('eventos_id'))
                 {
-                    foreach ($obj->old_value as $value) 
-                    {                
-                        if($value)
-                        {
-                            $ret = $ret . $value . "; ";                    
-                        }
-                    }
+                    $result = $fullModalClass[$model][0]::select($fullModalClass[$model][1])->where('eventos_id', (int) $request->get('eventos_id'))->get();
+                }else
+                {
+                    $result = $fullModalClass[$model][0]::select($fullModalClass[$model][1])->with('evento')->get();
                 }
 
-                return $ret;
-            })
-            ->editColumn('new_value', function ($obj) 
-            {
-                $ret = "";
-                
-                if($obj->new_value)
+                return Datatables::of($result)->make(true);
+                break;
+
+            case 'Desconto':
+                if($request->get('eventos_id'))
                 {
-                    foreach ($obj->new_value as $value) 
-                    {                
-                        if($value)
-                        {
-                            $ret = $ret . $value . "; ";                    
-                        }
-                    }
+                    $result = $fullModalClass[$model][0]::select($fullModalClass[$model][1])->where('eventos_id', (int) $request->get('eventos_id'))->with('evento')->get();
+                }else
+                {
+                    $result = $fullModalClass[$model][0]::select($fullModalClass[$model][1])->with('evento')->get();
                 }
 
-                return $ret;
-            })
-            ->make(true);
+                return Datatables::of($result)
+                                ->editColumn('porcentagem', function ($obj)
+                                    {
+                                        return $obj->porcentagem . " %";
+                                    })
+                                ->make(true);
+                break;
 
-        }
-        else
-        {
-            return Datatables::of($result)->make(true);    
+            case 'Lote':
+                if($request->get('eventos_id'))
+                {
+                    $result = $fullModalClass[$model][0]::where('eventos_id', (int) $request->get('eventos_id'))->with('evento')->get();
+                }else
+                {
+                    $result = $fullModalClass[$model][0]::with('evento')->get();
+                }
+
+                return Datatables::of($result)
+                                ->editColumn('porcentagem', function ($obj)
+                                    {
+                                        return $obj->porcentagem . " %";
+                                    })
+                                ->editColumn('valor_masculino', function ($obj)
+                                    {
+                                        return 'R$' . number_format($obj->valor_masculino, 2, ',', '.');;
+                                    })
+                                ->editColumn('valor_feminino', function ($obj)
+                                    {
+                                        return 'R$' . number_format($obj->valor_feminino, 2, ',', '.');;
+                                    })
+                                ->editColumn('dt_inicio', function ($obj)
+                                    {
+                                        return date('d-m-Y', strtotime($obj->dt_inicio));
+                                    })
+                                ->editColumn('dt_fim', function ($obj)
+                                    {
+                                        return date('d-m-Y', strtotime($obj->dt_fim));
+                                    })
+                                ->addColumn('vendidos', function ($obj)
+                                    {
+                                        return $obj->ingressosVendidosCount();
+                                    })
+                                ->make(true);
+                break;
+
+
+            default:
+                $result = $fullModalClass[$model][0]::select($fullModalClass[$model][1])->get();
+                return Datatables::of($result)->make(true);
+                break;
         }
     }
 }

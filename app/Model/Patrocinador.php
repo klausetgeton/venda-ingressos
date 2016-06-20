@@ -3,13 +3,10 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
-use OwenIt\Auditing\AuditingTrait;
 
 class Patrocinador extends Model
 {
-	use AuditingTrait;
-
-    /**
+   /**
      * The database table used by the model.
      *
      * @var string
@@ -28,6 +25,6 @@ class Patrocinador extends Model
     */
     public function evento()
     {
-        return $this->belongsTo('App\Model\Evento');
+        return $this->belongsTo('App\Model\Evento', 'eventos_id');
     }
 }
