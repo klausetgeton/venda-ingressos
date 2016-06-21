@@ -119,11 +119,52 @@ class Evento extends AuditedObject
             //merge the sold places and the available places
             $merged = $pc_disponiveis->merge($pc_vendidas, $pc_disponiveis);
 
+            //order by name
+            $merged = $merged->sortBy('nome');
+
+            $organized = array();
+
+            $currentLocation = null;
+
+            foreach ($merged as $pp)
+            {
+                if($currentLocation == null)
+                {
+                    $currentLocation = preg_replace('/[0-9]+/', '', $pp->nome);
+                }
+
+                if($currentLocation == preg_replace('/[0-9]+/', '', $pp->nome))
+                {
+                    $organized[$currentLocation][] = $pp;
+                }
+                else
+                {
+                    $currentLocation = preg_replace('/[0-9]+/', '', $pp->nome);
+                    $organized[$currentLocation][] = $pp;
+                }
+            }
+
+
+         //   dd($organized);
+
+            $novoOrganized = [];
+
+
+            foreach ($organized as $fileiraDesc => $acentos)
+            {
+                $fileira =  new \stdClass();
+                $fileira->descricao = $fileiraDesc;
+                $fileira->acentos = $acentos;
+
+                $novoOrganized[] = $fileira;
+            }
+
+
             $event = array();
             $event[0] = $this->toArray();
             $event[0]['lotes'] = $this->lotes;
             $event[0]['local']['possibilidades_compra'] = '';
-            $event[0]['lugares'] = $merged;
+            $event[0]['fileiras'] = $novoOrganized;
 
             return $event;
 
