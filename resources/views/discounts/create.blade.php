@@ -10,8 +10,8 @@
 		<ol class="progtrckr">
 	   		<li class="progtrckr-done">Evento</li>
 	   		<li class="progtrckr-done">Patrocinadores</li>
-	   		<li class="progtrckr-done">Lotes</li>
 		    <li class="progtrckr-todo">Descontos</li>
+	   		<li class="progtrckr-todo">Lotes</li>
 	    </ol>
 
 		<h1>Descontos</h1>
@@ -71,12 +71,12 @@
 			</thead>
 		</table>
 
-		<a class="btn btn-primary" href="{{ route('lots.create') }}">
+		<a class="btn btn-primary" href="{{ route('sponsors.create') }}">
 			<i class="fa fa-arrow-left" aria-hidden="true"></i>
 			Etapa Anterior
 		</a>
-		<a class="btn btn-primary" href="{{ route('events.finish', ['id' => session()->get('event_id')]) }}">
-			Finalizar
+		<a class="btn btn-primary" href="{{ route('lots.create') }}">
+			Próxima Etapa
 			<i class="fa fa-arrow-right" aria-hidden="true"></i>
 		</a>
 		</br>

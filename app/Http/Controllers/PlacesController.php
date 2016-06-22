@@ -46,6 +46,9 @@ class PlacesController extends Controller
 
 	public function update(PlacesRequest $request, $id)
 	{
+		$capacidade = (int) $request->qtd_x * (int) $request->qtd_y;
+		$request->merge(array('capacidade' => $capacidade));
+
 		$place = Local::find($id)->update($request->all());
 
 		$this->storePossibilities($id, $request->qtd_x, $request->qtd_y);
@@ -94,16 +97,15 @@ class PlacesController extends Controller
 		}
 	}
 
+	/**
+	* transform number to letter, (0 = A; 26 = AA. 27 = AB)
+	**/
 	private function getLetterByNumber($number)
 	{
-		$alphabet = range('A', 'Z');
-	  	$letter = '';
-	  	$number = (string) $number;
-
-		for ($i=0; isset($number[$i]); $i++)
-		{
-			$letter = $letter . $alphabet[$number[$i]];
-		}
+		for($letter = ""; $number >= 0; $number = intval($number / 26) - 1)
+        {
+            $letter = chr($number%26 + 0x41) . $letter;
+        }
 
 		return $letter;
 	}

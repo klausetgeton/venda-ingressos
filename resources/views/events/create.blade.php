@@ -9,8 +9,8 @@
 		<ol class="progtrckr">
        		<li class="progtrckr-todo">Evento</li>
        		<li class="progtrckr-todo">Patrocinadores</li>
-       		<li class="progtrckr-todo">Lotes</li>
 		    <li class="progtrckr-todo">Descontos</li>
+       		<li class="progtrckr-todo">Lotes</li>
 	    </ol>
 
 		<h1>Evento</h1>

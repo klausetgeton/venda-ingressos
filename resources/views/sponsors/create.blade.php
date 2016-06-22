@@ -11,8 +11,8 @@
 		<ol class="progtrckr">
 	   		<li class="progtrckr-done">Evento</li>
 	   		<li class="progtrckr-todo">Patrocinadores</li>
-	   		<li class="progtrckr-todo">Lotes</li>
 		    <li class="progtrckr-todo">Descontos</li>
+	   		<li class="progtrckr-todo">Lotes</li>
 	    </ol>
 
 		<h1>Patrocinadores</h1>
@@ -58,7 +58,7 @@
 			<i class="fa fa-arrow-left" aria-hidden="true"></i>
 			Etapa Anterior
 		</a>
-		<a class="btn btn-primary" href="{{ route('lots.create') }}">
+		<a class="btn btn-primary" href="{{ route('discounts.create') }}">
 			Próxima Etapa
 			<i class="fa fa-arrow-right" aria-hidden="true"></i>
 		</a>
