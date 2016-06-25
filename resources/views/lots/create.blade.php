@@ -11,11 +11,19 @@
 		<ol class="progtrckr">
 	   		<li class="progtrckr-done">Evento</li>
 	   		<li class="progtrckr-done">Patrocinadores</li>
+		    <li class="progtrckr-done">Descontos</li>
 	   		<li class="progtrckr-todo">Lotes</li>
-		    <li class="progtrckr-todo">Descontos</li>
 	    </ol>
 
 		<h1>Lotes</h1>
+
+		@if (count($errors) > 0)
+			<ul class="alert alert-warning">
+				@foreach($errors as $error)
+					<li>{{ $error }}</li>
+				@endforeach
+			</ul>
+		@endif
 
 		<div id="formErrors" style="visibility: hidden">
 		</div>
@@ -89,12 +97,12 @@
 			</thead>
 		</table>
 
-		<a class="btn btn-primary" href="{{ route('sponsors.create') }}">
+		<a class="btn btn-primary" href="{{ route('discounts.create') }}">
 			<i class="fa fa-arrow-left" aria-hidden="true"></i>
 			Etapa Anterior
 		</a>
-		<a class="btn btn-primary" href="{{ route('discounts.create') }}">
-			Próxima Etapa
+		<a class="btn btn-primary" href="{{ route('events.finish', ['id' => session()->get('event_id')]) }}">
+			Finalizar
 			<i class="fa fa-arrow-right" aria-hidden="true"></i>
 		</a>
 		</br>
@@ -200,16 +208,21 @@
 		        dataType: 'json',
 		        success: function(data)
 		        {
-		        	$('#formErrors').css('visibility', 'hidden');
-		         	resetForm();
-		         	refreshDataTable();
+		        	if(data == 'true')
+		        	{
+			        	$('#formErrors').css('visibility', 'hidden');
+			         	resetForm();
+			         	refreshDataTable();
+		        	}else
+		        	{
+			    		console.log(data);
+			    		apendFormErrors(data);
+		        	}
 				},
 				error:function(data){
 		    		var errors = data.responseJSON;
+		    		console.log(errors);
 		    		apendFormErrors(errors);
-	        		 $.each( errors, function( key, value ) {
-	            		console.log(value[0]);
-	        		});
 				}
 		    })
 		});
@@ -220,7 +233,7 @@
 			var errorsLi = "";
 
 	        $.each( data, function( key, value ) {
-	            errorsLi += '<li>' + value[0] + '</li>'; //showing only the first error.
+	            errorsLi += '<li>' + value[0] + '</li>';
 	        });
 
 	        errorsHtml += errorsLi;

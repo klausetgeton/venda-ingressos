@@ -77,17 +77,14 @@ class Evento extends AuditedObject
     */
     public function availableLotes()
     {
-        $today = date("H:i:s");
+        $today = date("d/m/Y");
 
-        //havent been totaly sold
-        $lotes = $this->lotes()->where('quantidade', '>', 0);
+        //havent been totaly sold, alread stared selling, haven't finished selling
+        $lots = $this->lotes()->where('quantidade', '>', 0)
+                                ->where('dt_inicio', '<=', $today)
+                                ->where('dt_fim', '>=', $today)->get();
 
-        if(isset($lotes))
-        {
-            $lotes = $lotes->where('data_inicio', '>=', $today);
-        }else
-        {
-        }
+        return $lots;
     }
 
     public function possibilidadesCompra()
@@ -122,10 +119,9 @@ class Evento extends AuditedObject
             //order by name
             $merged = $merged->sortBy('nome');
 
+            //organize seats by row
             $organized = array();
-
             $currentLocation = null;
-
             foreach ($merged as $pp)
             {
                 // Para usar no node e facilitar a comparacao
@@ -151,12 +147,8 @@ class Evento extends AuditedObject
                 }
             }
 
-
-         //   dd($organized);
-
+            //refator rows in array
             $novoOrganized = [];
-
-
             foreach ($organized as $fileiraDesc => $acentos)
             {
                 $fileira =  new \stdClass();

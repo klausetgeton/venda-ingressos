@@ -21,7 +21,29 @@ class EventsController extends Controller
 	{
 		if(session()->has('event_multiple'))
 		{
-			Evento::find($id)->update(['completo' => 'true']);
+			$event = Evento::find($id);
+
+			//validating number of tickets
+			//cant start an event without solding any ticket
+			if($event->lotes == null)
+			{
+				$errors[] = 'Este evento precisa ter ao menos um lote de ingressos cadastrado';
+				return view('lots.create', compact('errors'));
+			}
+
+			//validating number of tickets
+			//cant sell more tickets than the local capacity
+			$totalTickets = 0;
+			foreach ($event::find($id)->lotes as $lot) {
+				$totalTickets += $lot->quantidade;
+			}
+			if($totalTickets > $event->local->capacidade)
+			{
+				$errors[] = 'O número de ingressos a venda neste evento(' . $totalTickets . ') não deve ultrapassar a capacidade do Local(' . $event->local->capacidade . ')';
+				return view('lots.create', compact('errors'));
+			}
+
+			$event::find($id)->update(['completo' => 'true']);
 
 			session()->forget('event_multiple');
 			session()->forget('event_id');
@@ -58,9 +80,6 @@ class EventsController extends Controller
 		$event = Evento::find($id)->update($request->all());
 		session()->flash('message', 'ok');
 
-		session()->put('event_multiple', 'true');
-		session()->put('event_id', $request->id);
-
 		return redirect()->route('sponsors.create');
 
 		//return redirect()->route('events.index');
@@ -69,6 +88,9 @@ class EventsController extends Controller
 	public function edit($id)
 	{
 		$event = Evento::find($id);
+
+		session()->put('event_multiple', 'true');
+		session()->put('event_id', $id);
 
 		return view('events.create',compact('event'));
 	}
