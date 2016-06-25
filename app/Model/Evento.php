@@ -124,6 +124,13 @@ class Evento extends AuditedObject
             $currentLocation = null;
             foreach ($merged as $pp)
             {
+                // Para usar no node e facilitar a comparacao
+                // CARON, ALTEREI AQUI
+                // Esse aqui é gambs, nao vou conseguir alterar agora
+                $pp->posicao = $pp->nome;
+                // O boolean apenas nao me serve, para frente utilizo mais status.
+                $pp->situacao = ($pp->disponivel ? 'livre' : 'reservado');
+
                 if($currentLocation == null)
                 {
                     $currentLocation = preg_replace('/[0-9]+/', '', $pp->nome);
@@ -151,11 +158,13 @@ class Evento extends AuditedObject
                 $novoOrganized[] = $fileira;
             }
 
-            $event = array();
-            $event[0] = $this->toArray();
-            $event[0]['lotes'] = $this->availableLotes();
-            $event[0]['local']['possibilidades_compra'] = '';
-            $event[0]['fileiras'] = $novoOrganized;
+
+            // CARON, ALTEREI AQUI
+            // Antes estava com array dentro de array, como é especifico de 1 evento apenas removi o outro nivel
+            $event = $this->toArray();
+            $event['lotes'] = $this->lotes;
+            $event['local']['possibilidades_compra'] = '';
+            $event['fileiras'] = $novoOrganized;
 
             return $event;
 
@@ -165,5 +174,3 @@ class Evento extends AuditedObject
         }
     }
 }
-
-

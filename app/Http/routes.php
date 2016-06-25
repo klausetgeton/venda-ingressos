@@ -71,7 +71,7 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::put('events/update/{id}',['as'=>'events.update', 'middleware' => 'role:admin', 'uses'=>'EventsController@update']);
 		Route::get('events/delete/{id}',['as'=>'events.delete', 'middleware' => 'role:admin', 'uses'=>'EventsController@delete']);
 		Route::get('events/finish/{id}',['as'=>'events.finish', 'middleware' => 'role:admin', 'uses'=>'EventsController@finish']);
-		
+
 
 		//sponsors
 		Route::get('sponsors', ['as'=>'sponsors.index',	'middleware' => 'role:admin',	'uses'=>'SponsorsController@index']);
@@ -127,20 +127,22 @@ Route::get('/bbb', function(){
     return "asdasd";
 });
 
+// https://github.com/dingo/api/wiki/Creating-API-Endpoints
 $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', function($api) {
-  	// $api->get('hello', "App\Http\Controllers\APIController@index");
   	$api->post('authenticate', 'App\Http\Controllers\APIController@authenticate');
   	$api->post('register', 'App\Http\Controllers\APIController@register');
-  	$api->get('events/json', 'EventsController@getJsonList');
+  	$api->get('events/json', 'App\Http\Controllers\EventsController@getJsonList');
+  	/**
+  	 * MOVER PARA A AUTENTICADA DEPOIS
+  	 */
+  	//PurchasePossibility
+  	$api->get('pp/json/{events_id}', 'App\Http\Controllers\PurchasePossibilityController@getJsonListByEvent');
 });
 
 $api->version('v1', ['middleware' => 'api.auth'], function($api) {
   	$api->get('hello', "App\Http\Controllers\APIController@index");
   	$api->get('user', 'App\Http\Controllers\APIController@pegausuario');
   	//SoldTicket
-  	$api->post('tickets/store', 'SoldTicketController@store');
- 	//PurchasePossibility
-	$api->get('pp/json/{events_id}', 'PurchasePossibilityController@getJsonListByEvent');
-
+  	$api->post('tickets/store', 'App\Http\Controllers\SoldTicketController@store');
 });
