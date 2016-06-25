@@ -24,9 +24,9 @@ class SoldTicketController extends Controller
             $ingressoVendido->users_id = $usuario->id;
             $ingressoVendido->data_compra = date('Y-m-d H:i:s');
             // APENAS PARA TESTAR
-            $ingressoVendido->lotes_id = 1; //$acento['lotes_id'];
+            $ingressoVendido->lotes_id = $acento['loteId'];
             $ingressoVendido->descontos_id =  null; // $acento['descontos_id'];
-            $ingressoVendido->valor = 50; // valor de teste
+            $ingressoVendido->valor = $acento['valor'];
             $ingressoVendido->save();
         }
 
