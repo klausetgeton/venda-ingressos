@@ -26,7 +26,7 @@ class IngressoVendido extends AuditedObject
     */
     public function desconto()
     {
-        return $this->belongsTo('App\Model\Desconto');
+        return $this->belongsTo('App\Model\Desconto', 'descontos_id');
     }
 
     /**
@@ -34,7 +34,7 @@ class IngressoVendido extends AuditedObject
     */
     public function user()
     {
-        return $this->belongsTo('App\Model\User');
+        return $this->belongsTo('App\Model\User', 'users_id');
     }
 
     /**
@@ -42,13 +42,13 @@ class IngressoVendido extends AuditedObject
     */
     public function lote()
     {
-        return $this->belongsTo('App\Model\Lote');
+        return $this->belongsTo('App\Model\Lote', 'lotes_id');
     }
 
     /**
     */
     public function possibilidade_compra()
     {
-        return $this->belongsTo('App\Model\PossibilidadesCompra');
+        return $this->belongsTo('App\Model\PossibilidadeCompra', 'possibilidades_compra_id');
     }
 }

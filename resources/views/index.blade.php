@@ -90,11 +90,12 @@
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a href="{{ route('places.index') }}">Locais</a>
                                     <a href="{{ route('events.index') }}">Eventos</a>
+                                    <a href="{{ route('places.index') }}">Locais</a>
                                     <a href="{{ route('sponsors.index') }}">Patrocinadores</a>
                                     <a href="{{ route('discounts.index') }}">Descontos</a>
                                     <a href="{{ route('lots.index') }}">Lotes</a>
+                                    <a href="{{ route('tickets.index') }}">Ingressos Vendidos</a>
                                 </li>
                             </ul>
                         </li>

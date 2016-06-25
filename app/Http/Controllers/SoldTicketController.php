@@ -17,4 +17,9 @@ class SoldTicketController extends Controller
 
 		return response()->json('true');
 	}
+
+	public function index()
+	{
+		return view('tickets.index');
+	}
 }
