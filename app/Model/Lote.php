@@ -22,6 +22,13 @@ class Lote extends AuditedObject
      */
     protected $fillable = ['descricao', 'dt_inicio', 'nome', 'dt_fim', 'quantidade', 'eventos_id', 'valor_masculino', 'valor_feminino'];
 
+    /**
+    * Get the descontos for the lote.
+    */
+    public function ingressosVendidos()
+    {
+        return $this->hasMany('App\Model\IngressoVendido', 'lotes_id');
+    }
 
     /**
     * Get the descontos for the lote.

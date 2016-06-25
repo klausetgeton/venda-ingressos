@@ -95,6 +95,10 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::post('lots/edit/{id}', ['as'=>'lots.edit', 'middleware' => 'role:admin','uses'=>'LotsController@edit']);
 		Route::post('lots/delete/{id}',['as'=>'lots.delete', 'middleware' => 'role:admin', 'uses'=>'LotsController@delete']);
 		Route::get('lots/json/{events_id}', ['as' => 'lots.json', 'uses' => 'LotsController@getJsonListByEvent']);
+
+		//SoldTicket
+  		Route::get('tickets', ['as'=>'tickets.index',	'middleware' => 'role:admin',	'uses'=>'SoldTicketController@index']);
+  		Route::get('tickets/json/{users_id}', ['as'=>'tickets.json',	'middleware' => 'role:admin',	'uses'=>'SoldTicketController@getJsonListByUser'])->where('users_id', '[0-9]+');
     });
 
 });

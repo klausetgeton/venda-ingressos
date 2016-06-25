@@ -25,6 +25,8 @@ class DatatablesController extends Controller
         $fullModalClass['Patrocinador'] = ['App\Model\Patrocinador', ['id', 'nome', 'descricao', 'eventos_id']];
         $fullModalClass['Desconto'] = ['App\Model\Desconto', ['id', 'descricao', 'hash', 'quantidade' ,'porcentagem','eventos_id']];
         $fullModalClass['Lote'] = ['App\Model\Lote', ['id', 'descricao', 'dt_inicio', 'nome', 'dt_fim', 'quantidade', 'eventos_id', 'valor_masculino', 'valor_feminino']];
+        $fullModalClass['IngressoVendido'] = ['App\Model\IngressoVendido', ['id', 'data_cancelamento', 'data_compra', 'data_pagamento', 'valor']];
+
 
         switch ($model)
         {
@@ -103,6 +105,26 @@ class DatatablesController extends Controller
                                 ->make(true);
                 break;
 
+            case 'IngressoVendido':
+                $result = $fullModalClass[$model][0]::with(['desconto', 'lote.evento', 'possibilidade_compra', 'user'])->get();
+                return Datatables::of($result)
+                                    ->editColumn('data_compra', function ($obj)
+                                    {
+                                        return date('d-m-Y h:m:s', strtotime($obj->data_compra))    ;
+                                    })
+                                    ->editColumn('data_pagamento', function ($obj)
+                                    {
+                                        return isset($obj->data_pagamento) ? date('d-m-Y h:m:s', strtotime($obj->data_pagamento)) : null;
+                                    })
+                                    ->editColumn('data_cancelamento', function ($obj)
+                                    {
+                                        return isset($obj->data_cancelamento) ? date('d-m-Y h:m:s', strtotime($obj->data_cancelamento)) : null;
+                                    })
+                                    ->editColumn('valor', function ($obj)
+                                    {
+                                        return 'R$' . number_format($obj->valor, 2, ',', '.');;
+                                    })
+                                ->make(true);
 
             default:
                 $result = $fullModalClass[$model][0]::select($fullModalClass[$model][1])->get();
