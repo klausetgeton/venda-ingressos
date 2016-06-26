@@ -12,12 +12,8 @@ use App\Model\User;
 
 class APIController extends Controller
 {
-   public function index(){
-     return "asssdello";
-   }
-
    public function register(Request $request)
-    {        
+    {
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
         User::create($input);
@@ -47,7 +43,7 @@ class APIController extends Controller
     }
 
 
-    public function pegausuario()
+    public function getJsonUser()
     {
         try
         {
