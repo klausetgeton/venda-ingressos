@@ -13,7 +13,7 @@
        		<li class="progtrckr-todo">Lotes</li>
 	    </ol>
 
-		<h1>Evento</h1>
+		<h3>Evento</h3>
 
 		@if ($errors->any())
 			<ul class="alert alert-warning">

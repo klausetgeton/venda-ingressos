@@ -15,7 +15,7 @@
 	   		<li class="progtrckr-todo">Lotes</li>
 	    </ol>
 
-		<h1>Patrocinadores</h1>
+		<h3>Patrocinadores</h3>
 
 		<div id="formErrors" style="visibility: hidden ">
 		</div>

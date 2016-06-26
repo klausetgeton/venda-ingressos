@@ -4,7 +4,11 @@
 
 	<div class="container">
 
-		<h1>Ingressos Vendidos</h1>
+	 	<ol class="breadcrumb" style="margin-bottom: 5px;">
+            <li><a href='/'>Início</a></li>
+            <li class="active">Ingressos Vendidos</li>
+        </ol>
+		<h3>Ingressos Vendidos</h3>
 
 		<table id="dList" class="table table-striped table-hover dt-responsive nowrap">
 			<thead>

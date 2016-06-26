@@ -1,8 +1,14 @@
 @extends('index')
 
-@section('content')	
+@section('content')
 	<div class="container">
-		<h1>Usuário</h1>
+        <ol class="breadcrumb" style="margin-bottom: 5px;">
+            <li><a href='/'>Início</a></li>
+            <li><a href='{{route('users.index')}}'>Usuários</a></li>
+            <li class="active">Edição de Usuário</li>
+        </ol>
+
+		<h3>Usuário</h3>
 
 		@if ($errors->any())
 		<ul class="alert alert-warning">
@@ -13,11 +19,11 @@
 		@endif
 
 		@if (isset($user))
-			{!! Form::model($user, ['route' => ['users.update', $user->id], 'method' => 'put']) !!}				
+			{!! Form::model($user, ['route' => ['users.update', $user->id], 'method' => 'put']) !!}
 		@else
 			{!! Form::open(array('action' => 'UsersController@store')) !!}
 		@endif
-		
+
 		<div class="form-group">
 		{!! Form::label('name', 'Nome:*') !!}
 		{!! Form::text('name', Input::old('name'), ['class'=>'form-control']) !!}
@@ -37,12 +43,12 @@
 		{!! Form::label('email', 'Email:*') !!}
 		{!! Form::text('email', Input::old('email'), ['class'=>'form-control']) !!}
 		</div>
-	
+
 		<div class="form-group">
 			{!! Form::label('roles', 'Grupos:') !!}
 			{!! Form::select2('roles', isset($user) ? $user->roles()->get() : array(), 'Role', 'name', 'true', ['']) !!}
 		</div>
-		
+
 		@if (!isset($user))
 			<div class="form-group">
 			{!! Form::label('password', 'Senha:*') !!}
@@ -55,7 +61,7 @@
 		</div>
 		{!! Form::close() !!}
 	</div>
-	
+
 	<script src="/js/jquery.maskedinput.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		jQuery(function($){

@@ -11,7 +11,12 @@
 			</div>
 		@endif
 
-		<h1>Eventos</h1>
+		<ol class="breadcrumb" style="margin-bottom: 5px;">
+		    <li><a href='/'>Início</a></li>
+		    <li class="active">Eventos</li>
+		</ol>
+
+		<h3>Eventos</h3>
 
 		<a href="{{ route('events.create') }}" class="btn btn-default">Novo Evento</a>
 		<br />

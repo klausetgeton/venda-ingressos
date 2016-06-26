@@ -74,7 +74,7 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
+                    <li><a href="{{ url('/home') }}">Início</a></li>
                 </ul>
 
                 @if (Auth::guest())
@@ -83,32 +83,49 @@
                     </ul>
                 @endif
 
-                @role('admin')
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Eventos<span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="{{ route('events.index') }}">Eventos</a>
-                                    <a href="{{ route('places.index') }}">Locais</a>
-                                    <a href="{{ route('sponsors.index') }}">Patrocinadores</a>
-                                    <a href="{{ route('discounts.index') }}">Descontos</a>
-                                    <a href="{{ route('lots.index') }}">Lotes</a>
-                                    <a href="{{ route('tickets.index') }}">Ingressos Vendidos</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
 
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Eventos<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                @permission('event.view')
+                                    <a href="{{ route('events.index') }}">Eventos</a>
+                                @endpermission
+                                @permission('place.view')
+                                    <a href="{{ route('places.index') }}">Locais</a>
+                                @endpermission
+                                @permission('sponsor.view')
+                                    <a href="{{ route('sponsors.index') }}">Patrocinadores</a>
+                                @endpermission
+                                @permission('discount.view')
+                                    <a href="{{ route('discounts.index') }}">Descontos</a>
+                                @endpermission
+                                @permission('lot.view')
+                                    <a href="{{ route('lots.index') }}">Lotes</a>
+                                @endpermission
+                                @permission('soldticket.view')
+                                    <a href="{{ route('tickets.index') }}">Ingressos Vendidos</a>
+                                @endpermission
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                @permission('role.view')
                     <ul class="nav navbar-nav">
                         <li><a href="{{ route('roles.index') }}">Grupos</a></li>
                     </ul>
+                @endpermission
 
+                @permission('user.view')
                     <ul class="nav navbar-nav">
                         <li><a href="{{ route('users.index') }}">Usuários</a></li>
                     </ul>
+                @endpermission
 
+                @permission('role.view')
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Permissões<span class="caret"></span>
@@ -123,11 +140,12 @@
                             </ul>
                         </li>
                     </ul>
+                @endpermission
 
-                    <ul class="nav navbar-nav">
-                        <li><a href="{{ route('auditing.index') }}">Auditoria</a></li>
-                    </ul>
-                @endrole
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ route('auditing.index') }}">Auditoria</a></li>
+                </ul>
+
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">

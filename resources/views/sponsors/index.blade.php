@@ -4,7 +4,12 @@
 
 	<div class="container">
 
-		<h1>Patrocinadores</h1>
+		<ol class="breadcrumb" style="margin-bottom: 5px;">
+		    <li><a href='/'>Início</a></li>
+		    <li class="active">Patrocinadores</li>
+		</ol>
+
+		<h3>Patrocinadores</h3>
 
 		<table id="dList" class="table table-striped table-hover dt-responsive nowrap">
 			<thead>

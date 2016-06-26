@@ -5,7 +5,14 @@
     <meta name="_token" content="{{ csrf_token() }}" />
 
     <div class="container">
-        <h1>Permissões do {{$type == "user" ? "Usuário" : "Grupo"}}</h1>
+
+        <ol class="breadcrumb" style="margin-bottom: 5px;">
+            <li><a href="/">Início</a></li>
+            <li><a href="#">Permissões</a></li>
+            <li class="active">Permissões do {{$type == "user" ? "Usuário" : "Grupo"}}</li>
+        </ol>
+
+        <h3>Permissões do {{$type == "user" ? "Usuário" : "Grupo"}}</h3>
 
         @if ($errors->any())
             <ul class="alert alert-warning">

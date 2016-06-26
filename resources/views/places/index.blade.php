@@ -11,7 +11,12 @@
 		</div>
 		@endif
 
-		<h1>Locais</h1>
+    	<ol class="breadcrumb" style="margin-bottom: 5px;">
+            <li><a href='/'>Início</a></li>
+            <li class="active">Locais</li>
+    	</ol>
+
+		<h3>Locais</h3>
 		<a href="{{ route('places.create') }}" class="btn btn-default">Novo Local</a>
 		<br />
 		<br />

@@ -15,7 +15,7 @@
 	   		<li class="progtrckr-todo">Lotes</li>
 	    </ol>
 
-		<h1>Lotes</h1>
+		<h3>Lotes</h3>
 
 		@if (count($errors) > 0)
 			<ul class="alert alert-warning">

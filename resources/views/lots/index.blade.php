@@ -4,7 +4,12 @@
 
 	<div class="container">
 
-		<h1>Lotes</h1>
+		<ol class="breadcrumb" style="margin-bottom: 5px;">
+		    <li><a href='/'>Início</a></li>
+		    <li class="active">Lotes</li>
+		</ol>
+
+		<h3>Lotes</h3>
 
 		<table id="dList" class="table table-striped table-hover dt-responsive nowrap">
 			<thead>

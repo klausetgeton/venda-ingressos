@@ -14,7 +14,7 @@
 	   		<li class="progtrckr-todo">Lotes</li>
 	    </ol>
 
-		<h1>Descontos</h1>
+		<h3>Descontos</h3>
 
 		<div id="formErrors" style="visibility: hidden ">
 		</div>

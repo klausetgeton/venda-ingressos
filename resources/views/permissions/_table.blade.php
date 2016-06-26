@@ -10,7 +10,7 @@
     </thead>
     <tbody>
 
-    <?php $models = array("User", "Permission", "Role") ?>
+    <?php $models = array('Usuário', 'Permissão', 'Grupo','Evento', 'Local', 'Ingresso Vendido', 'Desconto', 'Lote', 'Patrocinador') ?>
 
     @foreach ($models as $model)
         <tr>

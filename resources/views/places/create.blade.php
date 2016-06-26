@@ -3,7 +3,14 @@
 @section('content')
 
 		<div class="container">
-			<h1>Local</h1>
+
+	    	<ol class="breadcrumb" style="margin-bottom: 5px;">
+	            <li><a href='/'>Início</a></li>
+	            <li><a href='{{route('places.index')}}'>Locais</a></li>
+	            <li class="active">Edição de Local</li>
+        	</ol>
+
+			<h3>Local</h3>
 
 			@if ($errors->any())
 			<ul class="alert alert-warning">
