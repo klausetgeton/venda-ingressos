@@ -144,5 +144,6 @@ $api->version('v1', ['middleware' => 'api.auth'], function($api) {
   	$api->get('hello', "App\Http\Controllers\APIController@index");
   	$api->get('user', 'App\Http\Controllers\APIController@pegausuario');
   	//SoldTicket
+  	$api->get('tickets/user/json', 'App\Http\Controllers\SoldTicketController@getJsonList');
   	$api->post('tickets/store', 'App\Http\Controllers\SoldTicketController@store');
 });

@@ -49,4 +49,10 @@ class SoldTicketController extends Controller
 			->get();
 		return response()->json($result);
 	}
+
+    public function getJsonList()
+	{
+		$usuario = JWTAuth::parseToken()->toUser();
+        return $this->getJsonListByUser($usuario->id);
+	}
 }
