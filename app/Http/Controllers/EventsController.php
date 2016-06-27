@@ -25,7 +25,7 @@ class EventsController extends Controller
 
 			//validating number of tickets
 			//cant start an event without solding any ticket
-			if($event->lotes == null)
+			if($event->lotes->isEmpty())
 			{
 				$errors[] = 'Este evento precisa ter ao menos um lote de ingressos cadastrado';
 				return view('lots.create', compact('errors'));

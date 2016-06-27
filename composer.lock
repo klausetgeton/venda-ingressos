@@ -5,6 +5,7 @@
         "This file is @generated automatically"
     ],
     "hash": "4bf2b7ca8ce91982292b1ab69ea924af",
+    "content-hash": "0bbde0b429c5fbde0139ed838dcd8da0",
     "packages": [
         {
             "name": "bican/roles",
@@ -107,40 +108,40 @@
         },
         {
             "name": "dingo/api",
-            "version": "dev-master",
+            "version": "v1.0.0-beta3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dingo/api.git",
-                "reference": "8cd1a6cd7d2ba9fc96841fd0745ef8fc1ce2a530"
+                "reference": "7fa939c8edc0fb775c495ae10f220a8cf66d399c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dingo/api/zipball/8cd1a6cd7d2ba9fc96841fd0745ef8fc1ce2a530",
-                "reference": "8cd1a6cd7d2ba9fc96841fd0745ef8fc1ce2a530",
+                "url": "https://api.github.com/repos/dingo/api/zipball/7fa939c8edc0fb775c495ae10f220a8cf66d399c",
+                "reference": "7fa939c8edc0fb775c495ae10f220a8cf66d399c",
                 "shasum": ""
             },
             "require": {
                 "dingo/blueprint": "0.1.*",
                 "doctrine/annotations": "1.2.*",
-                "illuminate/routing": "5.1.* || 5.2.*",
-                "illuminate/support": "5.1.* || 5.2.*",
+                "illuminate/routing": "~5.1",
+                "illuminate/support": "~5.1",
                 "league/fractal": ">=0.12.0",
-                "php": "^5.5.9 || ^7.0",
+                "php": ">=5.5.9",
                 "phpdocumentor/reflection-docblock": "2.0.*"
             },
             "require-dev": {
-                "illuminate/auth": "5.1.* || 5.2.*",
-                "illuminate/cache": "5.1.* || 5.2.*",
-                "illuminate/console": "5.1.* || 5.2.*",
-                "illuminate/database": "5.1.* || 5.2.*",
-                "illuminate/events": "5.1.* || 5.2.*",
-                "illuminate/filesystem": "5.1.* || 5.2.*",
-                "illuminate/log": "5.1.* || 5.2.*",
-                "illuminate/pagination": "5.1.* || 5.2.*",
-                "laravel/lumen-framework": "5.1.* || 5.2.*",
+                "illuminate/auth": "~5.1",
+                "illuminate/cache": "~5.1",
+                "illuminate/console": "~5.1",
+                "illuminate/database": "~5.1",
+                "illuminate/events": "~5.1",
+                "illuminate/filesystem": "~5.1",
+                "illuminate/log": "~5.1",
+                "illuminate/pagination": "~5.1",
+                "laravel/lumen-framework": "~5.1",
                 "lucadegasperi/oauth2-server-laravel": "5.0.*",
                 "mockery/mockery": "~0.9",
-                "phpunit/phpunit": "^4.8 || ^5.0",
+                "phpunit/phpunit": "~4.0",
                 "squizlabs/php_codesniffer": "~2.0",
                 "tymon/jwt-auth": "1.0.*"
             },
@@ -156,7 +157,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Dingo\\Api\\": "src/"
+                    "Dingo\\Api\\": "src"
                 },
                 "files": [
                     "src/helpers.php"
@@ -179,20 +180,20 @@
                 "laravel",
                 "restful"
             ],
-            "time": "2016-04-08 06:28:50"
+            "time": "2016-03-17 04:34:45"
         },
         {
             "name": "dingo/blueprint",
-            "version": "v0.1.5",
+            "version": "v0.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dingo/blueprint.git",
-                "reference": "0b01c9dc9d7032c64232996cfc93cd4838e15928"
+                "reference": "fbabe54262d9774589b560da0e35344f4ea40a28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dingo/blueprint/zipball/0b01c9dc9d7032c64232996cfc93cd4838e15928",
-                "reference": "0b01c9dc9d7032c64232996cfc93cd4838e15928",
+                "url": "https://api.github.com/repos/dingo/blueprint/zipball/fbabe54262d9774589b560da0e35344f4ea40a28",
+                "reference": "fbabe54262d9774589b560da0e35344f4ea40a28",
                 "shasum": ""
             },
             "require": {
@@ -235,7 +236,7 @@
                 "docs",
                 "laravel"
             ],
-            "time": "2016-03-31 11:16:28"
+            "time": "2016-04-12 06:00:10"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -2843,16 +2844,16 @@
         },
         {
             "name": "yajra/laravel-datatables-oracle",
-            "version": "v6.11.6",
+            "version": "v6.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yajra/laravel-datatables.git",
-                "reference": "6d9a36aa921ffc703e722a0f34d2dc56112562c6"
+                "reference": "b4a58ea33dc6a550fb82baa2cd54e9288b3ddc80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yajra/laravel-datatables/zipball/6d9a36aa921ffc703e722a0f34d2dc56112562c6",
-                "reference": "6d9a36aa921ffc703e722a0f34d2dc56112562c6",
+                "url": "https://api.github.com/repos/yajra/laravel-datatables/zipball/b4a58ea33dc6a550fb82baa2cd54e9288b3ddc80",
+                "reference": "b4a58ea33dc6a550fb82baa2cd54e9288b3ddc80",
                 "shasum": ""
             },
             "require": {
@@ -2896,7 +2897,7 @@
                 "laravel4",
                 "laravel5"
             ],
-            "time": "2016-06-18 11:40:02"
+            "time": "2016-06-25 08:13:11"
         }
     ],
     "packages-dev": [

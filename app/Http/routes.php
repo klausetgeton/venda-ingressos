@@ -100,24 +100,23 @@ Route::group(['middleware' => ['auth']], function () {
   		Route::get('tickets/json/{users_id}', ['as'=>'tickets.json', 'uses'=>'SoldTicketController@getJsonListByUser'])->where('users_id', '[0-9]+');
     });
 
+	Route::get('/datatables.data/{model}', [
+	    'as' => 'datatables.data',
+	    'uses' => 'DatatablesController@anyData'
+	]);
+
+	Route::get('/seek/{model?}/{search_column?}/{id?}', [
+		'as' => 'seek.data',
+		'uses' => 'SeekController@findById'
+	]);
+
+	Route::get('select2.data/{model}/{column}', ['as'=>'select2.data', 'uses'=>'Select2Controller@getData']);
 });
 
 
 Route::get('/permission.denied', function () {
     return view('errors.permissiondenied');
 });
-
-Route::get('/datatables.data/{model}', [
-    'as' => 'datatables.data',
-    'uses' => 'DatatablesController@anyData'
-]);
-
-Route::get('/seek/{model?}/{search_column?}/{id?}', [
-	'as' => 'seek.data',
-	'uses' => 'SeekController@findById'
-]);
-
-Route::get('select2.data/{model}/{column}', ['as'=>'select2.data', 'uses'=>'Select2Controller@getData']);
 
 
 // API

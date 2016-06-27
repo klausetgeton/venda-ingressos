@@ -83,35 +83,36 @@
                     </ul>
                 @endif
 
-
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Eventos<span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                @permission('event.view')
-                                    <a href="{{ route('events.index') }}">Eventos</a>
-                                @endpermission
-                                @permission('place.view')
-                                    <a href="{{ route('places.index') }}">Locais</a>
-                                @endpermission
-                                @permission('sponsor.view')
-                                    <a href="{{ route('sponsors.index') }}">Patrocinadores</a>
-                                @endpermission
-                                @permission('discount.view')
-                                    <a href="{{ route('discounts.index') }}">Descontos</a>
-                                @endpermission
-                                @permission('lot.view')
-                                    <a href="{{ route('lots.index') }}">Lotes</a>
-                                @endpermission
-                                @permission('soldticket.view')
-                                    <a href="{{ route('tickets.index') }}">Ingressos Vendidos</a>
-                                @endpermission
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                @if (!Auth::guest())
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Eventos<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    @permission('event.view')
+                                        <a href="{{ route('events.index') }}">Eventos</a>
+                                    @endpermission
+                                    @permission('place.view')
+                                        <a href="{{ route('places.index') }}">Locais</a>
+                                    @endpermission
+                                    @permission('sponsor.view')
+                                        <a href="{{ route('sponsors.index') }}">Patrocinadores</a>
+                                    @endpermission
+                                    @permission('discount.view')
+                                        <a href="{{ route('discounts.index') }}">Descontos</a>
+                                    @endpermission
+                                    @permission('lot.view')
+                                        <a href="{{ route('lots.index') }}">Lotes</a>
+                                    @endpermission
+                                    @permission('soldticket.view')
+                                        <a href="{{ route('tickets.index') }}">Ingressos Vendidos</a>
+                                    @endpermission
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                @endif
 
                 @permission('role.view')
                     <ul class="nav navbar-nav">
@@ -125,7 +126,7 @@
                     </ul>
                 @endpermission
 
-                @permission('role.view')
+                @permission('permission.view')
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Permissões<span class="caret"></span>
@@ -142,9 +143,11 @@
                     </ul>
                 @endpermission
 
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ route('auditing.index') }}">Auditoria</a></li>
-                </ul>
+                @permission('audit.view')
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ route('auditing.index') }}">Auditoria</a></li>
+                    </ul>
+                @endpermission
 
 
                 <!-- Right Side Of Navbar -->

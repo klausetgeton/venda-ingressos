@@ -2,15 +2,12 @@
     <thead>
         <tr>
             <th>Tabela</th>
-            <th>Listar</th>
-            <th>Criar</th>
-            <th>Editar</th>
-            <th>Apagar</th>
+            <th colspan="4">Permissões</th>
         </tr>
     </thead>
     <tbody>
 
-    <?php $models = array('Usuário', 'Permissão', 'Grupo','Evento', 'Local', 'Ingresso Vendido', 'Desconto', 'Lote', 'Patrocinador') ?>
+    <?php $models = array('Usuário', 'Permissão', 'Grupo','Evento', 'Local', 'Ingresso Vendido', 'Desconto', 'Lote', 'Patrocinador', 'Auditoria') ?>
 
     @foreach ($models as $model)
         <tr>
